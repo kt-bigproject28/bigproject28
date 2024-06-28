@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Page</title>
+    <link rel="stylesheet" href="{% static 'index.css' %}">
+</head>
+<body>
+    <div class="container">
+        <a id="loginButton" class="login-button" href="{% url 'login' %}">Login</a>
+    </div>
+</body>
+</html>
