@@ -78,11 +78,17 @@ WSGI_APPLICATION = "aivle_big.wsgi.application"
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'db.sqlite3',
+    },
+    'detect_db': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'detectdb.sqlite3',
     }
 }
+
+DATABASE_ROUTERS = ['detect.routers.DetectAppRouter']
 
 
 # Password validation

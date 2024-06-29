@@ -14,19 +14,21 @@ def upload_image_for_detection(request):
         fs = FileSystemStorage()
         filename = fs.save(image_file.name, image_file)
         image_url = fs.url(filename)
-        
         user = request.user
         # Process the image and get pest ID and confidence
         pest_id, confidence = process_image(image_file)
 
         try:
-            pest_info = Pest.objects.get(id=pest_id)
-            detection = PestDetection.objects.create(
+            # Use the specified database for querying
+            pest_info = Pest.objects.using('detect_db').get(id=pest_id)
+            # Use the specified database for saving
+            detection = PestDetection(
                 user=user,
                 pest=pest_info,
                 image=image_file,
                 detection_date=timezone.now()
             )
+            detection.save(using='detect_db')
 
             context = {
                 'pest_name': pest_info.pest_name,
