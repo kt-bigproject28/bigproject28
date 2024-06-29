@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
 import { GNB } from "./GNB";
 import styled from "styled-components";
+import TopBar from "./TopBar";
 
 // 스타일링된 컴포넌트 정의
 const Main = styled.main`
@@ -27,6 +28,7 @@ export const MainLayout = () => {
   return (
     <>
       <Main>
+        <TopBar />
         <Outlet />
       </Main>
       <GNB />
