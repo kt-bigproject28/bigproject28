@@ -9,7 +9,10 @@
 </head>
 <body>
     <div class="container">
-        <a id="loginButton" class="login-button" href="{% url 'login' %}">Login</a>
+        <!-- Login Button -->
+        <a id="loginButton" class="login-button" href="{% url 'login:login' %}">Login</a>
+        <!-- Signup Button -->
+        <a id="signupButton" class="signup-button" href="{% url 'login:signup' %}">Sign Up</a>
     </div>
 </body>
 </html>
