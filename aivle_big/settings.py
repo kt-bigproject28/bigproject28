@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     'rest_framework',
     "login",
+    "community"
     
 ]
 
@@ -78,17 +79,35 @@ WSGI_APPLICATION = "aivle_big.wsgi.application"
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'big_project',
+        'USER': 'project_user',
+        'PASSWORD': 'aivle202405!',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    },
+    'community_db': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'community_db',
+        'USER': 'project_user',
+        'PASSWORD': 'aivle202405!',
+        'HOST': 'localhost',
+        'PORT': '5432',
     },
     'login_db': {
-        'ENGINE': 'django.db.backends.sqlite3',  # Example using SQLite
-        'NAME': BASE_DIR / 'login_db.sqlite3',
-    }    
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'login_db',
+        'USER': 'project_user',
+        'PASSWORD': 'aivle202405!',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    },
 }
 
-DATABASE_ROUTERS = ['login.router.LoginAppRouter']
+DATABASE_ROUTERS = ['aivle_big.routers.LoginAppRouter', 'aivle_big.routers.CommunityAppRouter']
+
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -124,12 +143,13 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
-LANGUAGE_CODE = "en-us"
+# LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ko-kr'
 
-TIME_ZONE = "UTC"
-
+# TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Seoul'
 USE_I18N = True
-
+USE_L10N = True
 USE_TZ = True
 
 
@@ -153,11 +173,17 @@ LOGGING = {
     'disable_existing_loggers': False,
     'handlers': {
         'console': {
+            'level': 'DEBUG',
             'class': 'logging.StreamHandler',
+        },
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': BASE_DIR / 'debug.log',
         },
     },
     'root': {
-        'handlers': ['console'],
+        'handlers': ['console', 'file'],
         'level': 'DEBUG',
     },
 }

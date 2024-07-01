@@ -1,0 +1,27 @@
+<!-- community/templates/community/post_list.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Posts</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Community Posts</h2>
+        <ul>
+            {% for post in posts %}
+                <li>
+                    <a href="{% url 'community:post_detail' post.pk %}">{{ post.title }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+        {% if user.is_authenticated %}
+            <a href="{% url 'community:post_create' %}" class="btn btn-primary">Create New Post</a>
+        {% else %}
+            <p>You must <a href="{% url 'login:login' %}">log in</a> to create or edit posts.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

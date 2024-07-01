@@ -70,6 +70,7 @@ from django.contrib.auth import get_user_model
 from .models import User
 from cryptography.fernet import Fernet
 from django.conf import settings
+from django.contrib.auth import logout
 
 
 logger = logging.getLogger(__name__)
@@ -80,7 +81,7 @@ def signup(request):
         if form.is_valid():
             user = form.save()
             auth_login(request, user)  # Optionally log the user in immediately after registration
-            return redirect('index')  # Redirect to a main or profile page
+            return redirect('/')  # Redirect to a main or profile page
         else:
             logger.debug(form.errors)  # Log form errors for debugging
             return render(request, 'signup.html', {'form': form})
@@ -142,3 +143,7 @@ def send_verification_email(request):
     except Exception as e:
         logger.error(f"Error sending verification email: {e}")
         return JsonResponse({'message': 'An error occurred while sending the verification code.'}, status=500)
+
+def logout_view(request):
+    logout(request)
+    return redirect('/')
