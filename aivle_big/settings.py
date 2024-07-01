@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 import os
+from dotenv import load_dotenv # 환경변수 불러오기
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -40,6 +42,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     'rest_framework',
     "login",
+    "selfchatbot",
     
 ]
 
@@ -85,10 +88,16 @@ DATABASES = {
     'login_db': {
         'ENGINE': 'django.db.backends.sqlite3',  # Example using SQLite
         'NAME': BASE_DIR / 'login_db.sqlite3',
-    }    
+    },
+    'selfchatbot_db': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'selfchatbot_db.sqlite3',
+    }  
 }
 
 DATABASE_ROUTERS = ['login.router.LoginAppRouter']
+DATABASE_ROUTERS = ['selfchatbot.router.SelfChatbotRouter']
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -161,3 +170,12 @@ LOGGING = {
         'level': 'DEBUG',
     },
 }
+
+
+#환경변수 가져오기(API키)
+env_path = Path('.') / '.env'# .env 파일 경로 설정
+load_dotenv(dotenv_path=env_path)# .env 파일 로드
+OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')# API 키 가져오기
+os.environ['OPENAI_API_KEY'] = OPENAI_API_KEY#환경 변수로 API키 등록
+
+
