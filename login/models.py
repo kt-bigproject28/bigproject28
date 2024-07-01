@@ -1,5 +1,6 @@
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+# login/models.py
 from django.db import models
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 
 class UserManager(BaseUserManager):
     def create_user(self, email, username, password=None):
@@ -33,20 +34,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
 
+    class Meta:
+        db_table = 'user'
+
     def __str__(self):
         return self.email
-
-    groups = models.ManyToManyField(
-        'auth.Group',
-        verbose_name='user groups',
-        blank=True,
-        related_name="custom_user_groups",
-        help_text='The groups this user belongs to.'
-    )
-    user_permissions = models.ManyToManyField(
-        'auth.Permission',
-        verbose_name='user permissions',
-        blank=True,
-        related_name="custom_user_permissions",
-        help_text='Specific permissions for this user.'
-    )

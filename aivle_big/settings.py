@@ -77,19 +77,22 @@ WSGI_APPLICATION = "aivle_big.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
+from decouple import config
+
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'big_project',
-        'USER': 'project_user',
-        'PASSWORD': 'aivle202405!',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
+        'NAME': os.getenv('DB_NAME', 'big_project'),
+        'USER': os.getenv('DB_USER', 'project_user'),
+        'PASSWORD': os.getenv('DB_PASSWORD', 'aivle202405!'),
+        'HOST': os.getenv('DB_HOST', 'localhost'),
+        'PORT': os.getenv('DB_PORT', '5432'),
+    },
 }
 
-DATABASE_ROUTERS = []
+DATABASE_ROUTERS = ['aivle_big.routers.SchemaRouter']
 
 AUTH_USER_MODEL = 'login.User'
 
