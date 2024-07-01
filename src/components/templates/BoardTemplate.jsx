@@ -24,7 +24,7 @@ const BoardLink = styled(Link)`
   background-color: white;
   border: 1px solid #e5e7eb;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   transition: background-color 0.3s, box-shadow 0.3s;
 
   &:hover {
@@ -48,15 +48,15 @@ const BoardTemplate = () => {
   return (
     <Container>
       <Title>게시판 목록</Title>
-      <BoardLink to="/sell">
+      <BoardLink to="/sellboard">
         <FaStore size={24} />
         판매 게시판
       </BoardLink>
-      <BoardLink to="/buy">
+      <BoardLink to="/buyboard">
         <FaShoppingCart size={24} />
         구매 게시판
       </BoardLink>
-      <BoardLink to="/exchange">
+      <BoardLink>
         <FaHandsHelping size={24} />
         품앗이 게시판
       </BoardLink>

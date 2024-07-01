@@ -5,7 +5,8 @@ import TopBar from "./TopBar";
 
 // 스타일링된 컴포넌트 정의
 const Main = styled.main`
-  margin-bottom: 0px;
+  margin-bottom: 56px;
+  padding: 16px;
 `;
 
 export const MainLayout = () => {

@@ -1,5 +1,7 @@
+import SellBoardTemplate from "../components/templates/SellBoardTemplate";
+
 const SellBoardPage = () => {
-  return <div> 판매게시판 페이지</div>;
+  return <SellBoardTemplate />;
 };
 
 export default SellBoardPage;
