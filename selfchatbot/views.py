@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from .models import Chatbot
 import logging
-from langchain_openai import ChatOpenAI
+from langchain.chat_models import ChatOpenAI
 from langchain.chains import ConversationalRetrievalChain
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.vectorstores import Chroma
@@ -11,9 +11,10 @@ from langchain.memory import ConversationBufferMemory
 import os
 from django.urls import reverse
 from django.http import HttpResponse
+import environ
 
-
-
+env = environ.Env()
+environ.Env.read_env()
 
 logger = logging.getLogger(__name__)
 
@@ -30,28 +31,27 @@ qa_chain = ConversationalRetrievalChain.from_llm(
     memory=memory
 )
 
+def chat_page(request):
+    return render(request, 'chat_page.html')
+
 def chatbot(request):
     if request.method == "POST":
         query = request.POST.get('question')
         if query:
             try:
-                # 질문 답변 생성
                 result = qa_chain(query)
                 answer = result["result"]
 
-                # 현재 시간 추가
                 timestamp = timezone.now()
 
-                # 채팅 기록 저장
                 Chatbot.objects.create(
-                    user_id=request.user.id,
+                    user_id=request.user.id if request.user.is_authenticated else None,
                     session_id=request.session.session_key,
                     question_content=query,
                     answer_content=answer,
                     created_at=timestamp
                 )
 
-                # 세션에서 기존 로그를 가져옴
                 logs = request.session.get('logs', [])
                 logs.append({
                     'question': query,
@@ -59,29 +59,29 @@ def chatbot(request):
                     'timestamp': timestamp.strftime('%Y-%m-%d %H:%M:%S')
                 })
 
-                # 세션에 로그를 저장
                 request.session['logs'] = logs
 
                 context = {
                     'logs': logs
                 }
-                return render(request, 'selfgpt/result.html', context)#채팅기록을 반환(context안에 채팅 기록이 있음)session별로
+                return render(request, 'result.html', context)
 
             except Exception as e:
                 logger.error(f"Error during chat processing: {e}")
-                return redirect('error_page')  # 에러 페이지로 리디렉션 또는 적절한 에러 처리
+                return redirect('selfchatbot:error_page')
 
         else:
             logger.warning("No question provided.")
-            return redirect('chat_page')  # 질문이 없을 경우 다시 질문 페이지로 리디렉션
+            return redirect('selfchatbot:chat_page')
 
-    # GET 요청일 경우 채팅 페이지로 리디렉션
-    return redirect('chat_page')
+    return redirect('selfchatbot:chat_page')
 
+def error_page(request):
+    return render(request, 'error_page.html')
 
-def chat_clear_logs(request): #채팅기록 로그 삭제
+def chat_clear_logs(request):
     if request.method == 'POST':
         request.session['logs'] = []
-        return redirect('selfchatgpt:index')
+        return redirect('selfchatbot:chat_page')
     else:
         return HttpResponse(status=405)

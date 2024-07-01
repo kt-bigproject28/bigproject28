@@ -60,19 +60,20 @@ ROOT_URLCONF = "aivle_big.urls"
 
 TEMPLATES = [
     {
-        "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [f'{BASE_DIR}/templates'],
-        "APP_DIRS": True,
-        "OPTIONS": {
-            "context_processors": [
-                "django.template.context_processors.debug",
-                "django.template.context_processors.request",
-                "django.contrib.auth.context_processors.auth",
-                "django.contrib.messages.context_processors.messages",
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
             ],
         },
     },
 ]
+
 
 WSGI_APPLICATION = "aivle_big.wsgi.application"
 
@@ -81,23 +82,15 @@ WSGI_APPLICATION = "aivle_big.wsgi.application"
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    },
-    'login_db': {
-        'ENGINE': 'django.db.backends.sqlite3',  # Example using SQLite
-        'NAME': BASE_DIR / 'login_db.sqlite3',
-    },
-    'selfchatbot_db': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'selfchatbot_db.sqlite3',
-    }  
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'big_project',
+        'USER': 'project_user',
+        'PASSWORD': 'aivle202405!',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
 }
-
-DATABASE_ROUTERS = ['login.router.LoginAppRouter']
-DATABASE_ROUTERS = ['selfchatbot.router.SelfChatbotRouter']
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators

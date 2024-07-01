@@ -1,11 +1,11 @@
-from django.contrib import admin
-from django.urls import path, include
-from django.contrib.auth import views as auth_views
+from django.urls import path
 from . import views
 
-app_name = 'selfchatbot'  # 네임스페이스를 설정합니다.
+app_name = 'selfchatbot'
 
 urlpatterns = [
-    path('chatbot', views.chatbot, name='chatbot'), #
-    path('clear_logs', views.chat_clear_logs, name='clear_logs'), #채팅기록 삭제
+    path('chat/', views.chat_page, name='chat_page'),
+    path('chatbot/', views.chatbot, name='chatbot'),
+    path('clear_logs/', views.chat_clear_logs, name='clear_logs'),
+    path('error/', views.error_page, name='error_page'),  # Add this line
 ]

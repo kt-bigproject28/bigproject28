@@ -27,5 +27,5 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path('login/', include('login.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
-    path('selfchatbot/', include('selfchatbot.urls',namespace='selfchatbot')),
+    path('selfchatbot/', include('selfchatbot.urls', namespace='selfchatbot')),
 ]
