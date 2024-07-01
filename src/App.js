@@ -1,15 +1,17 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import SignupPage from "./pages/SignupPage";
-import MainPage from "./pages/MainPage";
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import MainPage from './pages/MainPage';
+import ExpectedReturnPage from "./pages/ExpectedReturnPage";
+import CropsPage from './pages/CropsPage';
 
 function App() {
   return (
-    <BrowserRouter>
+    <Router>
       <Routes>
-        <Route path="signup" element={<SignupPage />} />
         <Route path="/" element={<MainPage />} />
+        <Route path="Crops" element={<CropsPage />} />
+        <Route path="ExpectedReturn" element={<ExpectedReturnPage />} />
       </Routes>
-    </BrowserRouter>
+    </Router>
   );
 }
 export default App;
