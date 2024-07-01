@@ -86,26 +86,12 @@ DATABASES = {
         'PASSWORD': 'aivle202405!',
         'HOST': 'localhost',
         'PORT': '5432',
-    },
-    'community_db': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'community_db',
-        'USER': 'project_user',
-        'PASSWORD': 'aivle202405!',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    },
-    'login_db': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'login_db',
-        'USER': 'project_user',
-        'PASSWORD': 'aivle202405!',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    },
+    }
 }
 
-DATABASE_ROUTERS = ['aivle_big.routers.LoginAppRouter', 'aivle_big.routers.CommunityAppRouter']
+DATABASE_ROUTERS = []
+
+AUTH_USER_MODEL = 'login.User'
 
 
 
@@ -127,18 +113,21 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-AUTH_USER_MODEL = 'login.User'
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
 
+import os
+from dotenv import load_dotenv
+load_dotenv()
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'aivleai28@gmail.com'
-EMAIL_HOST_PASSWORD = 'ztat zrqp tckf bvae'
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+EMAIL_HOST = os.getenv('EMAIL_HOST')
+EMAIL_PORT = int(os.getenv('EMAIL_PORT'))
+EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS') == 'True'
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = 'iatu rajv ubti lkkv'#os.getenv('EMAIL_HOST_PASSWORD')
+DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL')
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/

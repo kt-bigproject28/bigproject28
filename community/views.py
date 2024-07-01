@@ -7,12 +7,11 @@ import logging
 logger = logging.getLogger(__name__)
 
 def post_list(request):
-    posts = Post.objects.using('community_db').all()
-    return render(request, 'post_list.html', {'posts': 
-        posts})
+    posts = Post.objects.all()
+    return render(request, 'post_list.html', {'posts': posts})
 
 def post_detail(request, post_id):
-    post = get_object_or_404(Post.objects.using('community_db'), pk=post_id)
+    post = get_object_or_404(Post, pk=post_id)
     return render(request, 'post_detail.html', {'post': post})
 
 @login_required
@@ -24,9 +23,9 @@ def post_create(request):
             post.user = request.user
             try:
                 logger.debug(f"Attempting to save post: {post.title} for user: {request.user.username}, Email: {request.user.email}")
-                post.save(using='community_db')
+                post.save()
                 logger.debug(f"Post saved successfully with ID: {post.pk}")
-                return redirect('community:post_detail', pk=post.pk)
+                return redirect('community:post_detail', post_id=post.pk)
             except Exception as e:
                 logger.error(f"Error saving post: {e}")
                 return render(request, 'post_form.html', {'form': form, 'error': str(e)})
@@ -36,11 +35,11 @@ def post_create(request):
 
 @login_required
 def post_edit(request, post_id):
-    post = get_object_or_404(Post.objects.using('community_db'), pk=post_id)
+    post = get_object_or_404(Post, pk=post_id)
     if request.method == 'POST':
         form = PostForm(request.POST, instance=post)
         if form.is_valid():
-            form.save(using='community_db')
+            form.save()
             return redirect('community:post_detail', post_id=post.pk)
     else:
         form = PostForm(instance=post)
@@ -48,8 +47,8 @@ def post_edit(request, post_id):
 
 @login_required
 def post_delete(request, post_id):
-    post = get_object_or_404(Post.objects.using('community_db'), pk=post_id)
+    post = get_object_or_404(Post, pk=post_id)
     if request.method == 'POST':
-        post.delete(using='community_db')
+        post.delete()
         return redirect('community:post_list')
     return render(request, 'post_confirm_delete.html', {'post': post})

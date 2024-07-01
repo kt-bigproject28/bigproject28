@@ -1,20 +1,15 @@
-<!-- community/templates/community/post_confirm_delete.html -->
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Delete Post</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <div class="container mt-5">
-        <h2>Are you sure you want to delete this post?</h2>
-        <form method="post">
-            {% csrf_token %}
-            <button type="submit" class="btn btn-danger">Confirm</button>
-            <a href="{% url 'community:post_detail' post.pk %}" class="btn btn-secondary">Cancel</a>
-        </form>
-    </div>
+    <h1>Delete Post</h1>
+    <p>Are you sure you want to delete "{{ post.title }}"?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Delete</button>
+    </form>
+    <a href="{% url 'community:post_list' %}">Cancel</a>
 </body>
 </html>
