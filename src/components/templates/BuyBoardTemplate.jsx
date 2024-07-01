@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
   display: grid;
@@ -41,6 +42,11 @@ const PostItem = styled.li`
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1), 0 0 8px rgba(74, 170, 135, 0.3);
     border-color: #4aaa87;
   }
+`;
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: inherit;
 `;
 
 const PostTitle = styled.h2`
@@ -155,11 +161,13 @@ const BuyBoardTemplate = () => {
       <PostList>
         {posts.map((post) => (
           <PostItem key={post.id}>
-            <PostTitle>{post.title}</PostTitle>
-            <PostMeta>
-              작성자: {post.author} | 작성일: {post.date}
-            </PostMeta>
-            <PostContent>{post.content}</PostContent>
+            <StyledLink to={`/post/${post.id}`}>
+              <PostTitle>{post.title}</PostTitle>
+              <PostMeta>
+                작성자: {post.author} | 작성일: {post.date}
+              </PostMeta>
+              <PostContent>{post.content}</PostContent>
+            </StyledLink>
           </PostItem>
         ))}
       </PostList>

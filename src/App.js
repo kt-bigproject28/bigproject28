@@ -5,6 +5,7 @@ import BoardPage from "./pages/BoardPage";
 import BuyBoardPage from "./pages/BuyBoardPage";
 import SellBoardPage from "./pages/SellBoardPage";
 import MyBoardPage from "./pages/MyBoardPage";
+import PostDetailPage from "./pages/PostDetailPage";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="buyboard" element={<BuyBoardPage />} />
           <Route path="sellboard" element={<SellBoardPage />} />
           <Route path="myboard" element={<MyBoardPage />} />
+          <Route path="post/:id" element={<PostDetailPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
