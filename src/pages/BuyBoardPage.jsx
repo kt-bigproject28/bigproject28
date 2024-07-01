@@ -1,5 +1,7 @@
+import BuyBoardTemplate from "../components/templates/BuyBoardTemplate";
+
 const BuyBoardPage = () => {
-  return <div> 구매게시판 페이지 </div>;
+  return <BuyBoardTemplate />;
 };
 
 export default BuyBoardPage;
