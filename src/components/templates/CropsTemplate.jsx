@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { AiOutlinePlus, AiOutlineBell } from 'react-icons/ai';
-import { BsFlower3 } from 'react-icons/bs';
+import axios from "axios"; // axios 추가
+import { AiOutlineBell, AiOutlinePlus } from 'react-icons/ai'; 
 import { useNavigate } from 'react-router-dom';
 
 // 스타일 정의
@@ -76,9 +76,11 @@ const PlantButton = styled.button`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center; 
   padding: 0.5rem;
   border: none;
   cursor: pointer;
+  text-align: center; 
 `;
 
 const PlantImage = styled.img`
@@ -89,16 +91,21 @@ const PlantImage = styled.img`
   margin-bottom: 0.5rem;
 `;
 
+const PlusIcon = styled(AiOutlinePlus)`
+  font-size: 2rem;
+  color: #4CAF50;
+  margin-bottom: 0.5rem;
+`;
+
 const PlantName = styled.h2`
   font-size: 0.8rem;
   margin: 0.5rem 0;
 `;
 
-// 팝업 스타일 정의
 const PopupOverlay = styled.div`
   position: fixed;
-  top: 10%;  // 위쪽 여백 추가
-  bottom: 10%;  // 아래쪽 여백 추가
+  top: 0;
+  bottom: 0;
   left: 0;
   right: 0;
   background: rgba(0, 0, 0, 0.5);
@@ -113,12 +120,13 @@ const PopupContent = styled.div`
   padding: 2rem;
   border-radius: 10px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  max-width: 400px;
-  max-height: 80%;  // 팝업 높이 조정
-  width: 100%;
+  width: 400px;
+  max-height: 80%;
   position: relative;
   z-index: 1001;
-  overflow-y: auto;  // 내용이 넘칠 경우 스크롤 가능하게 함
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
 `;
 
 const PopupCloseButton = styled.button`
@@ -129,87 +137,17 @@ const PopupCloseButton = styled.button`
   top: 20px;
   right: 20px;
   cursor: pointer;
-  z-index: 1002;
 `;
 
-// App 컴포넌트 스타일 정의
-const AppContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  background-color: #ffffff;
-`;
-
-const AppHeader = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-  background-color: #ffffff;
-  border-bottom: 1px solid #ccc;
-`;
-
-const TitleContainer = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const AppTitle = styled.h1`
-  margin-left: 10px;
-  font-size: 1.5rem;
-`;
-
-const ListContainer = styled.div`
-  overflow-y: auto;
-`;
-
-const ListItem = styled.div`
-  padding: 15px;
-  border-bottom: 1px solid #ccc;
-`;
-
-const Footer = styled.div`
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  padding: 10px;
-  background-color: #ffffff;
-  border-top: 1px solid #ccc;
-`;
-
-const FooterButton = styled.button`
-  background: none;
+const NavigateButton = styled.button`
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
   border: none;
+  border-radius: 5px;
   cursor: pointer;
-  font-size: 1.5rem;
+  margin-top: auto;
 `;
-
-const App = () => {
-  return (
-    <AppContainer>
-      <AppHeader>
-        <TitleContainer>
-          <BsFlower3 size={30} />
-          <AppTitle>Title</AppTitle>
-        </TitleContainer>
-        <div>
-          <AiOutlinePlus size={30} />
-          <AiOutlineBell size={30} style={{ marginLeft: '10px' }} />
-        </div>
-      </AppHeader>
-      <ListContainer>
-        {Array(7).fill(null).map((_, index) => (
-          <ListItem key={index}>Title</ListItem>
-        ))}
-      </ListContainer>
-      <Footer>
-        <FooterButton>🏠</FooterButton>
-        <FooterButton>📸</FooterButton>
-        <FooterButton>📊</FooterButton>
-      </Footer>
-    </AppContainer>
-  );
-};
 
 const CropsPage = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -228,9 +166,6 @@ const CropsPage = () => {
       <Header>
         <Title>작물 목록</Title>
         <IconContainer>
-          <Icon onClick={togglePopup}>
-            <AiOutlinePlus size={30} />
-          </Icon>
           <Icon>
             <AiOutlineBell size={30} />
           </Icon>
@@ -239,9 +174,9 @@ const CropsPage = () => {
       <Content>
         <CategoryButton>All</CategoryButton>
         <PlantGrid>
-          <PlantButton onClick={navigateToExpectedReturnPage}>
-            <PlantImage src="https://via.placeholder.com/100" alt="Roma Tomato" />
-            <PlantName>Chili</PlantName>
+          <PlantButton onClick={togglePopup}>
+            <PlusIcon />
+            <PlantName>MyCrops</PlantName>
           </PlantButton>
           <PlantButton onClick={navigateToExpectedReturnPage}>
             <PlantImage src="https://via.placeholder.com/100" alt="Cherokee Tomato" />
@@ -274,11 +209,99 @@ const CropsPage = () => {
         <PopupOverlay onClick={togglePopup}>
           <PopupContent onClick={(e) => e.stopPropagation()}>
             <PopupCloseButton onClick={togglePopup}>×</PopupCloseButton>
-            <App />
+            <CropsPopup navigateToExpectedReturnPage={navigateToExpectedReturnPage} />
           </PopupContent>
         </PopupOverlay>
       )}
     </PageContainer>
+  );
+};
+
+const CropsPopup = ({ navigateToExpectedReturnPage }) => {
+  const [area, setArea] = useState("");
+  const [crops, setCrops] = useState([
+    { name: "가을감자", region: "", hourlySales: "52,661원", salesPer3m: "7,765원" },
+    { name: "가을무", region: "", hourlySales: "43,222원", salesPer3m: "7,759원" },
+    { name: "가을배추", region: "", hourlySales: "41,714원", salesPer3m: "8,798원" },
+    { name: "가지", region: "", hourlySales: "39,151원", salesPer3m: "29,962원" },
+    { name: "토마토", region: "", hourlySales: "60,000원", salesPer3m: "10,000원" },
+    { name: "고추", region: "", hourlySales: "45,000원", salesPer3m: "9,000원" },
+    { name: "오이", region: "", hourlySales: "35,000원", salesPer3m: "8,000원" },
+    { name: "상추", region: "", hourlySales: "25,000원", salesPer3m: "7,000원" },
+    { name: "파프리카", region: "", hourlySales: "55,000원", salesPer3m: "12,000원" },
+    { name: "양배추", region: "", hourlySales: "40,000원", salesPer3m: "9,500원" },
+    { name: "딸기", region: "", hourlySales: "70,000원", salesPer3m: "15,000원" },
+    { name: "블루베리", region: "", hourlySales: "65,000원", salesPer3m: "13,000원" },
+    { name: "브로콜리", region: "", hourlySales: "50,000원", salesPer3m: "10,500원" },
+    { name: "양파", region: "", hourlySales: "30,000원", salesPer3m: "6,500원" },
+    { name: "마늘", region: "", hourlySales: "45,000원", salesPer3m: "8,500원" },
+    { name: "배추", region: "", hourlySales: "55,000원", salesPer3m: "11,000원" },
+    { name: "무", region: "", hourlySales: "35,000원", salesPer3m: "7,500원" },
+    { name: "호박", region: "", hourlySales: "25,000원", salesPer3m: "5,500원" },
+    { name: "멜론", region: "", hourlySales: "65,000원", salesPer3m: "14,000원" },
+    { name: "수박", region: "", hourlySales: "60,000원", salesPer3m: "13,500원" },
+  ]);
+
+  useEffect(() => {
+    const fetchCrops = async () => {
+      try {
+        const response = await axios.get("/api/crops"); // 실제 API 엔드포인트로 변경 필요
+        setCrops(response.data);
+      } catch (error) {
+        console.error("Failed to fetch crops data:", error);
+      }
+    };
+
+    fetchCrops();
+  }, []);
+
+  const handleAreaChange = (e) => {
+    setArea(e.target.value);
+  };
+
+  return (
+    <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+      <div>
+        <h2>01 재배 면적을 설정해 주세요</h2>
+        <input
+          type="text"
+          value={area}
+          onChange={handleAreaChange}
+          placeholder="면적을 입력해 주세요."
+        />
+        <span> = m²</span>
+      </div>
+      <div>
+        <h2>02 희망 재배 작물을 선택해 주세요</h2>
+        <input type="text" placeholder="원하는 작물명을 검색해 주세요." />
+        <button>검색</button>
+        <table>
+          <thead>
+            <tr>
+              <th>선택</th>
+              <th>작물명</th>
+              <th>지역</th>
+              <th>시간당 매출</th>
+              <th>3.3㎡당 매출</th>
+            </tr>
+          </thead>
+          <tbody>
+            {crops.map((crop, index) => (
+              <tr key={index}>
+                <td>
+                  <input type="checkbox" />
+                </td>
+                <td>{crop.name}</td>
+                <td>{crop.region}</td>
+                <td>{crop.hourlySales}</td>
+                <td>{crop.salesPer3m}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <NavigateButton onClick={navigateToExpectedReturnPage}>예상 수익 페이지로 이동</NavigateButton>
+    </div>
   );
 };
 
