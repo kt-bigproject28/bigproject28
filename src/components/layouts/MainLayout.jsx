@@ -30,8 +30,8 @@ export const MainLayout = () => {
       <Container>
         <TopBar />
         <Outlet />
+        <GNB />
       </Container>
-      <GNB />
     </>
   );
 };

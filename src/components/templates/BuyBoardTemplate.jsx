@@ -4,31 +4,32 @@ import { Link } from "react-router-dom";
 import { FaUserAlt, FaCalendarAlt } from "react-icons/fa";
 
 const Container = styled.div`
-  display: grid;
-  gap: 1.5rem;
+  display: flex;
+  flex-direction: column;
   padding: 24px;
   background-color: #f5f5f5;
 `;
 
 const Title = styled.h1`
-  font-size: 20px;
-  margin-bottom: 12px;
+  font-size: 24px;
   color: #444;
-  position: sticky;
-  top: 0;
-  background-color: #f5f5f5;
-  padding: 16px;
-  z-index: 1000;
+  padding: 16px 0;
   border-bottom: 2px solid #4aaa87;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 16px;
+  text-align: center;
 `;
 
 const SearchBar = styled.input`
-  width: 96%;
-  padding: 10px;
   font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+  border: 2px solid #4aaa87;
+  padding: 8px;
+  border-radius: 12px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  &:focus {
+    outline: none;
+    border-color: #6dc4b0;
+  }
 `;
 
 const PostList = styled.div`
@@ -36,13 +37,36 @@ const PostList = styled.div`
   gap: 1rem;
 `;
 
-const PostItem = styled.div`
-  background-color: #ffffff;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-  padding: 8px 2px;
+const Table = styled.table`
   width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+  overflow: hidden;
+`;
+
+const TableHeader = styled.thead`
+  background-color: #4aaa87;
+  color: white;
+`;
+
+const TableRow = styled.tr`
+  &:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+
+  &:hover {
+    background-color: #f1f1f1;
+  }
+`;
+
+const TableCell = styled.td`
+  padding: 12px;
+  border-bottom: 1px solid #ccc;
+  font-size: 14px;
+  color: ${(props) => (props.header ? "aliceblue" : "black")};
+  text-align: left;
 `;
 
 const StyledLink = styled(Link)`
@@ -50,37 +74,23 @@ const StyledLink = styled(Link)`
   color: inherit;
 `;
 
-const PostTitle = styled.h2`
-  font-size: 20px;
-  margin-bottom: 8px;
-  color: #4aaa87;
-`;
-
-const PostMeta = styled.div`
-  display: flex;
-  align-items: center;
+const PostTitle = styled.span`
   font-size: 14px;
-  color: #888;
-  margin-bottom: 8px;
+  font-weight: bold;
+  color: #4aaa87;
+  display: inline-block;
+  max-width: 150px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 const MetaIcon = styled.div`
   display: flex;
+  font-size: 9px;
+  font-weight: 500;
   align-items: center;
-  margin-right: 8px;
-  color: #6b7280;
-`;
-
-const PostContent = styled.p`
-  color: #555;
-  font-size: 16px;
-  line-height: 1.5;
-  margin-bottom: 12px;
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  color: #black;
 `;
 
 const BuyBoardTemplate = () => {
@@ -97,7 +107,7 @@ const BuyBoardTemplate = () => {
     },
     {
       id: 2,
-      title: "감자 구매합니다",
+      title: "감자 구매합니다 감자 구매합니다 감자 구매합니다",
       author: "김철수",
       date: "2024-06-29",
       content:
@@ -181,29 +191,37 @@ const BuyBoardTemplate = () => {
       <Title>구매 게시판</Title>
       <SearchBar
         type="text"
-        placeholder="제목을 검색하세요..."
+        placeholder="  제목을 검색하세요"
         value={searchTerm}
         onChange={handleSearchChange}
       />
       <PostList>
-        {filteredPosts.map((post) => (
-          <PostItem key={post.id}>
-            <StyledLink to={`/post/${post.id}`}>
-              <PostTitle>{post.title}</PostTitle>
-              <PostMeta>
-                <MetaIcon>
-                  <FaUserAlt size={14} style={{ marginRight: "4px" }} />
-                  {post.author}
-                </MetaIcon>
-                <MetaIcon>
-                  <FaCalendarAlt size={14} style={{ marginRight: "4px" }} />
-                  {post.date}
-                </MetaIcon>
-              </PostMeta>
-              <PostContent>{post.content}</PostContent>
-            </StyledLink>
-          </PostItem>
-        ))}
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableCell header>제목</TableCell>
+              <TableCell header>작성자</TableCell>
+              <TableCell header>작성일</TableCell>
+            </TableRow>
+          </TableHeader>
+          <tbody>
+            {filteredPosts.map((post) => (
+              <TableRow key={post.id}>
+                <TableCell>
+                  <StyledLink to={`/post/${post.id}`}>
+                    <PostTitle>{post.title}</PostTitle>
+                  </StyledLink>
+                </TableCell>
+                <TableCell>
+                  <MetaIcon>{post.author}</MetaIcon>
+                </TableCell>
+                <TableCell>
+                  <MetaIcon>{post.date}</MetaIcon>
+                </TableCell>
+              </TableRow>
+            ))}
+          </tbody>
+        </Table>
       </PostList>
     </Container>
   );

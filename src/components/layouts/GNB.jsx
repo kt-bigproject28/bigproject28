@@ -14,7 +14,6 @@ const Nav = styled.nav`
   bottom: 0;
   z-index: 50;
   width: 100%;
-  padding: 0 16px;
   background-color: #f3f4f6;
   border-top: 1px solid #e5e7eb;
 `;
@@ -88,13 +87,13 @@ export const GNB = () => {
           <ChatIcon />
         </ChatIconWrapper>
         <MenuLink
-          to="/analytics"
-          className={currentPage === "/analytics" ? "active" : ""}
+          to="/board"
+          className={currentPage === "/board" ? "active" : ""}
         >
-          <IconWrapper isActive={currentPage === "/analytics"}>
+          <IconWrapper isActive={currentPage === "/board"}>
             <FaChartBar size={24} />
           </IconWrapper>
-          <MenuText isActive={currentPage === "/analytics"}>분석</MenuText>
+          <MenuText isActive={currentPage === "/board"}>게시판</MenuText>
         </MenuLink>
         <MenuLink
           to="/profile"
