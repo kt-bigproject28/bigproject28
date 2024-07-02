@@ -1260,3 +1260,21 @@ Authentication failed. No user found with email: lhu0770@gmail.com.
 Authentication failed. No user found with email: lhu0770@gmail.com.
 Attempting to save post: 1 for user: lhu0770, Email: lhu0770@gmail.com
 Post saved successfully with ID: 1
+Watching for file changes with StatReloader
+User found with email: lhu0770@gmail.com. Username: lhu0770
+Authentication failed for email lhu0770@gmail.com. Invalid email or password.
+User found with email: lhu0770@gmail.com. Username: lhu0770
+User lhu0770@gmail.com authenticated successfully.
+Watching for file changes with StatReloader
+User found with email: lhu0770@gmail.com. Username: lhu0770
+Authentication failed for email lhu0770@gmail.com. Invalid email or password.
+Watching for file changes with StatReloader
+E:\빅프로젝트_34조\be_login\bigproject28\aivle_big\settings.py changed, reloading.
+Watching for file changes with StatReloader
+E:\빅프로젝트_34조\be_login\bigproject28\aivle_big\settings.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Attempting to save post: 1 for user: lhu0770, Email: lhu0770@gmail.com
+Post saved successfully with ID: 1
