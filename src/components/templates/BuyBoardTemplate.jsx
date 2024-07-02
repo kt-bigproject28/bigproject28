@@ -1,17 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { FaUserAlt, FaCalendarAlt } from "react-icons/fa";
 
 const Container = styled.div`
   display: grid;
   gap: 1.5rem;
-  align-items: start;
   padding: 24px;
   background-color: #f5f5f5;
 `;
 
 const Title = styled.h1`
-  font-size: 28px;
+  font-size: 20px;
   margin-bottom: 12px;
   color: #444;
   position: sticky;
@@ -23,25 +23,26 @@ const Title = styled.h1`
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 `;
 
-const PostList = styled.ul`
-  list-style-type: none;
-  padding: 0;
-  width: 100%;
+const SearchBar = styled.input`
+  width: 96%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
 `;
 
-const PostItem = styled.li`
-  background-color: #fff;
-  border: 1px solid #ddd;
+const PostList = styled.div`
+  display: grid;
+  gap: 1rem;
+`;
+
+const PostItem = styled.div`
+  background-color: #ffffff;
+  border: 1px solid #ccc;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-  margin-bottom: 12px;
-  padding: 12px;
-  transition: box-shadow 0.3s, border-color 0.3s;
-
-  &:hover {
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1), 0 0 8px rgba(74, 170, 135, 0.3);
-    border-color: #4aaa87;
-  }
+  padding: 8px 2px;
+  width: 100%;
 `;
 
 const StyledLink = styled(Link)`
@@ -51,28 +52,40 @@ const StyledLink = styled(Link)`
 
 const PostTitle = styled.h2`
   font-size: 20px;
-  margin-bottom: 4px;
+  margin-bottom: 8px;
   color: #4aaa87;
 `;
 
 const PostMeta = styled.div`
+  display: flex;
+  align-items: center;
   font-size: 14px;
   color: #888;
   margin-bottom: 8px;
 `;
 
+const MetaIcon = styled.div`
+  display: flex;
+  align-items: center;
+  margin-right: 8px;
+  color: #6b7280;
+`;
+
 const PostContent = styled.p`
   color: #555;
   font-size: 16px;
-  line-height: 1.4;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  line-height: 1.5;
+  margin-bottom: 12px;
   display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 const BuyBoardTemplate = () => {
+  const [searchTerm, setSearchTerm] = useState("");
+
   const posts = [
     {
       id: 1,
@@ -155,16 +168,37 @@ const BuyBoardTemplate = () => {
     },
   ];
 
+  const filteredPosts = posts.filter((post) =>
+    post.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
   return (
     <Container>
       <Title>구매 게시판</Title>
+      <SearchBar
+        type="text"
+        placeholder="제목을 검색하세요..."
+        value={searchTerm}
+        onChange={handleSearchChange}
+      />
       <PostList>
-        {posts.map((post) => (
+        {filteredPosts.map((post) => (
           <PostItem key={post.id}>
             <StyledLink to={`/post/${post.id}`}>
               <PostTitle>{post.title}</PostTitle>
               <PostMeta>
-                작성자: {post.author} | 작성일: {post.date}
+                <MetaIcon>
+                  <FaUserAlt size={14} style={{ marginRight: "4px" }} />
+                  {post.author}
+                </MetaIcon>
+                <MetaIcon>
+                  <FaCalendarAlt size={14} style={{ marginRight: "4px" }} />
+                  {post.date}
+                </MetaIcon>
               </PostMeta>
               <PostContent>{post.content}</PostContent>
             </StyledLink>
