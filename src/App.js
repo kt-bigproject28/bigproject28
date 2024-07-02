@@ -6,6 +6,7 @@ import BuyBoardPage from "./pages/BuyBoardPage";
 import SellBoardPage from "./pages/SellBoardPage";
 import MyBoardPage from "./pages/MyBoardPage";
 import PostDetailPage from "./pages/PostDetailPage";
+import WritePostPage from "./pages/WritePostPage";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="sellboard" element={<SellBoardPage />} />
           <Route path="myboard" element={<MyBoardPage />} />
           <Route path="post/:id" element={<PostDetailPage />} />
+          <Route path="post/write" element={<WritePostPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
