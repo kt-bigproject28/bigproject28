@@ -23,9 +23,7 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 8px;
-  margin-bottom: 8px;
-  margin-right: 26px;
+  margin: 8px 26px;
 `;
 
 const MenuLink = styled(Link)`
@@ -41,6 +39,7 @@ const IconWrapper = styled.div`
 
 const MenuText = styled.div`
   font-size: 12px;
+  font-weight: bold;
   color: ${({ isActive }) => (isActive ? "#4AAA87" : "#6b7280")};
 `;
 

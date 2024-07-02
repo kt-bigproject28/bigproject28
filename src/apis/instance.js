@@ -1,8 +1,10 @@
+/* api 연결 */
+
 import axios from "axios";
 
 export const instance = axios.create({
   timeout: 5000,
-  //baseURL: 
+  //baseURL:
   headers: {
     "Content-Type": "application/json",
   },

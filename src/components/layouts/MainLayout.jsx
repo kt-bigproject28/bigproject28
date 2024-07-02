@@ -1,12 +1,11 @@
 import { Outlet } from "react-router-dom";
 import { GNB } from "./GNB";
-import styled from "styled-components";
 import TopBar from "./TopBar";
+import styled from "styled-components";
 
-// 스타일링된 컴포넌트 정의
-const Main = styled.main`
-  margin-bottom: 56px;
-  padding: 16px;
+const Container = styled.div`
+  padding-bottom: 40px;
+  margin-bottom: 20px;
 `;
 
 export const MainLayout = () => {
@@ -28,10 +27,10 @@ export const MainLayout = () => {
 
   return (
     <>
-      <Main>
+      <Container>
         <TopBar />
         <Outlet />
-      </Main>
+      </Container>
       <GNB />
     </>
   );
