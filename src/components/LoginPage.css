@@ -1,0 +1,61 @@
+/* src/components/LoginPage.css */
+.login-page {
+  padding: 20px;
+}
+
+.login-page h2 {
+  color: #4CAF50;
+}
+
+.login-page .form-group {
+  margin-bottom: 15px;
+}
+
+.login-page label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.login-page input[type="email"],
+.login-page input[type="password"] {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.login-page button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px;
+  border: none;
+  width: 100%;
+  cursor: pointer;
+}
+
+.login-page button:hover {
+  background-color: #45a049;
+}
+
+.login-page a {
+  color: #4CAF50;
+}
+
+.login-page .remember-me-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.login-page .remember-me-label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+.login-page .remember-me-label input[type="checkbox"] {
+  margin-right: 5px;
+}

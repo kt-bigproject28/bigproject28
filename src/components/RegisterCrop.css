@@ -1,0 +1,42 @@
+.register-crop {
+  padding: 20px;
+}
+
+.register-crop h2 {
+  margin-bottom: 20px;
+}
+
+.register-crop .crop-pic {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.register-crop .crop-pic img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+
+.register-crop .crop-pic button {
+  display: block;
+  margin: 10px auto;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-top: 10px;
+}
+
+input {
+  padding: 10px;
+  margin-top: 5px;
+}
+
+button {
+  margin-top: 20px;
+  padding: 10px;
+}

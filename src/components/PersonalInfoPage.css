@@ -1,0 +1,38 @@
+.personal-info-page {
+  padding: 20px;
+}
+
+.personal-info-page h2 {
+  color: #4CAF50;
+}
+
+.personal-info-page .form-group {
+  margin-bottom: 15px;
+}
+
+.personal-info-page label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.personal-info-page input[type="text"],
+.personal-info-page input[type="email"],
+.personal-info-page input[type="password"],
+.personal-info-page input[type="file"] {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+}
+
+.personal-info-page button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px;
+  border: none;
+  width: 100%;
+  cursor: pointer;
+}
+
+.personal-info-page button:hover {
+  background-color: #45a049;
+}

@@ -1,0 +1,16 @@
+.delete-account {
+  padding: 20px;
+}
+
+.delete-account h2 {
+  margin-bottom: 20px;
+}
+
+.delete-account p {
+  margin-bottom: 20px;
+}
+
+.delete-account button {
+  margin-right: 10px;
+  padding: 10px 20px;
+}

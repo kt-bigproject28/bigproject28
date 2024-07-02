@@ -1,0 +1,33 @@
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.my-posts {
+  flex: 1;
+  overflow-y: auto; /* Enable vertical scrolling */
+  padding: 20px;
+}
+
+.my-posts h2 {
+  margin-bottom: 20px;
+}
+
+.my-posts ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.my-posts li {
+  padding: 10px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
