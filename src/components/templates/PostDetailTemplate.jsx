@@ -3,8 +3,12 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 
 const Container = styled.div`
-  padding: 24px;
-  background-color: #f5f5f5;
+  display: flex;
+  flex-direction: column;
+
+  padding: 16px;
+  background-color: #f9f9f9;
+  height: 100%;
 `;
 
 const Title = styled.h1`
@@ -13,18 +17,25 @@ const Title = styled.h1`
   color: #444;
   border-bottom: 2px solid #4aaa87;
   padding-bottom: 8px;
+  text-align: center;
 `;
 
 const PostMeta = styled.div`
   font-size: 14px;
   color: #888;
   margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
 `;
 
 const PostContent = styled.p`
   color: #555;
   font-size: 16px;
   line-height: 1.6;
+  background-color: #fff;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 `;
 
 const CommentList = styled.ul`
@@ -38,7 +49,7 @@ const CommentItem = styled.li`
   border: 1px solid #ccc;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 12px;
+  padding: 8px 16px;
   margin-bottom: 12px;
 `;
 
@@ -51,16 +62,19 @@ const CommentContent = styled.div`
   color: #555;
 `;
 
-const CommentForm = styled.form`
-  margin-top: 24px;
-`;
+const CommentForm = styled.form``;
 
 const CommentTextarea = styled.textarea`
   width: 100%;
-  padding: 10px;
+  margin: 8px 8px 8px 0;
   font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  &:focus {
+    outline: none;
+    border-color: #4aaa87;
+  }
 `;
 
 const CommentButton = styled.button`
@@ -70,7 +84,7 @@ const CommentButton = styled.button`
   background-color: #4aaa87;
   color: #fff;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
 
   &:hover {
@@ -187,7 +201,8 @@ const PostDetailTemplate = () => {
     <Container>
       <Title>{post.title}</Title>
       <PostMeta>
-        작성자: {post.author} | 작성일: {post.date}
+        <span>작성자: {post.author}</span>
+        <span>작성일: {post.date}</span>
       </PostMeta>
       <PostContent>{post.content}</PostContent>
 
@@ -203,7 +218,7 @@ const PostDetailTemplate = () => {
       <CommentForm onSubmit={handleSubmitComment}>
         <CommentTextarea
           rows="4"
-          placeholder="댓글을 작성하세요..."
+          placeholder="댓글을 작성하세요"
           value={newComment}
           onChange={handleCommentChange}
         />
