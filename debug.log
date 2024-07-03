@@ -1278,3 +1278,344 @@ Watching for file changes with StatReloader
 Watching for file changes with StatReloader
 Attempting to save post: 1 for user: lhu0770, Email: lhu0770@gmail.com
 Post saved successfully with ID: 1
+Watching for file changes with StatReloader
+Internal Server Error: /community/
+Traceback (most recent call last):
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.UndefinedColumn: column post.id does not exist
+LINE 1: SELECT "post"."id", "post"."user_id", "post"."title", "post"...
+               ^
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\빅프로젝트_34조\be_community\bigproject28\community\views.py", line 13, in post_list
+    return render(request, 'post_list.html', {'posts': posts})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\base.py", line 171, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\defaulttags.py", line 198, in render
+    len_values = len(values)
+                 ^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\db\models\query.py", line 382, in __len__
+    self._fetch_all()
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\db\models\query.py", line 1928, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\db\models\query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\db\models\sql\compiler.py", line 1562, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\db\backends\utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\db\backends\utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\db\backends\utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\db\backends\utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.ProgrammingError: column post.id does not exist
+LINE 1: SELECT "post"."id", "post"."user_id", "post"."title", "post"...
+               ^
+
+User found with email: lhu0770@gmail.com. Username: lhu0770
+Authentication failed for email lhu0770@gmail.com. Invalid email or password.
+User found with email: lhu0770@gmail.com. Username: lhu0770
+Authentication failed for email lhu0770@gmail.com. Invalid email or password.
+User found with email: lhu0770@gmail.com. Username: lhu0770
+User lhu0770@gmail.com authenticated successfully.
+E:\빅프로젝트_34조\be_community\bigproject28\community\views.py changed, reloading.
+Watching for file changes with StatReloader
+E:\빅프로젝트_34조\be_community\bigproject28\community\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /community/post/create/
+Traceback (most recent call last):
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\base.py", line 502, in parse
+    compile_func = self.tags[command]
+                   ~~~~~~~~~^^^^^^^^^
+KeyError: 'static'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\빅프로젝트_34조\be_community\bigproject28\community\views.py", line 35, in post_create
+    return render(request, 'post_form.html', {'form': form})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\backends\django.py", line 33, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+           ^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\base.py", line 196, in compile_nodelist
+    return parser.parse()
+           ^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\base.py", line 504, in parse
+    self.invalid_block_tag(token, command, parse_until)
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\base.py", line 565, in invalid_block_tag
+    raise self.error(
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 7: 'static'. Did you forget to register or load this tag?
+E:\빅프로젝트_34조\be_community\bigproject28\aivle_big\settings.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /community/post/create/
+Traceback (most recent call last):
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\base.py", line 502, in parse
+    compile_func = self.tags[command]
+                   ~~~~~~~~~^^^^^^^^^
+KeyError: 'static'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\빅프로젝트_34조\be_community\bigproject28\community\views.py", line 35, in post_create
+    return render(request, 'post_form.html', {'form': form})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\backends\django.py", line 33, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+           ^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\base.py", line 196, in compile_nodelist
+    return parser.parse()
+           ^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\base.py", line 504, in parse
+    self.invalid_block_tag(token, command, parse_until)
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\base.py", line 565, in invalid_block_tag
+    raise self.error(
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 7: 'static'. Did you forget to register or load this tag?
+Attempting to save post: test for user: lhu0770, Email: lhu0770@gmail.com
+Error saving post: column "user_id" of relation "post" does not exist
+LINE 1: INSERT INTO "post" ("user_id", "title", "content", "creation...
+                            ^
+
+Attempting to save post: test for user: lhu0770, Email: lhu0770@gmail.com
+Error saving post: column "user_id" of relation "post" does not exist
+LINE 1: INSERT INTO "post" ("user_id", "title", "content", "creation...
+                            ^
+
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+User found with email: lhu0770@gmail.com. Username: lhu0770
+User lhu0770@gmail.com authenticated successfully.
+Attempting to save post: test for user: lhu0770, Email: lhu0770@gmail.com
+Error saving post: relation "community_post" does not exist
+LINE 1: INSERT INTO "community_post" ("user_id", "title", "content",...
+                    ^
+
+E:\빅프로젝트_34조\be_community\bigproject28\community\models.py changed, reloading.
+Watching for file changes with StatReloader
+Attempting to save post: test for user: lhu0770, Email: lhu0770@gmail.com
+Error saving post: column "user_id" of relation "post" does not exist
+LINE 1: INSERT INTO "post" ("user_id", "title", "content", "creation...
+                            ^
+
+Watching for file changes with StatReloader
+Attempting to save post: test for user: lhu0770, Email: lhu0770@gmail.com
+Error saving post: column "user_id" of relation "post" does not exist
+LINE 1: INSERT INTO "post" ("user_id", "title", "content", "creation...
+                            ^
+
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Attempting to save post: test for user: lhu0770, Email: lhu0770@gmail.com
+Error saving post: column "user_id" of relation "post" does not exist
+LINE 1: INSERT INTO "post" ("user_id", "title", "content", "creation...
+                            ^
+
+E:\빅프로젝트_34조\be_community\bigproject28\aivle_big\settings.py changed, reloading.
+Watching for file changes with StatReloader
+E:\빅프로젝트_34조\be_community\bigproject28\aivle_big\settings.py changed, reloading.
+Watching for file changes with StatReloader
+User found with email: lhu0770@gmail.com. Username: lhu0770
+Authentication failed for email lhu0770@gmail.com. Invalid email or password.
+User found with email: lhu0770@gmail.com. Username: lhu0770
+User lhu0770@gmail.com authenticated successfully.
+Attempting to save post: test for user: lhu0770, Email: lhu0770@gmail.com
+Error saving post: column "user_id" of relation "post" does not exist
+LINE 1: INSERT INTO "post" ("user_id", "title", "content", "creation...
+                            ^
+
+Attempting to save post: test for user: lhu0770, Email: lhu0770@gmail.com
+Post saved successfully with ID: 1
+Internal Server Error: /community/post/1/
+Traceback (most recent call last):
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\base.py", line 502, in parse
+    compile_func = self.tags[command]
+                   ~~~~~~~~~^^^^^^^^^
+KeyError: 'static'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\빅프로젝트_34조\be_community\bigproject28\community\views.py", line 16, in post_detail
+    return render(request, 'post_detail.html', {'post': post, 'comment_form': comment_form})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\backends\django.py", line 33, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+           ^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\base.py", line 196, in compile_nodelist
+    return parser.parse()
+           ^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\base.py", line 504, in parse
+    self.invalid_block_tag(token, command, parse_until)
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\base.py", line 565, in invalid_block_tag
+    raise self.error(
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 7: 'static'. Did you forget to register or load this tag?
+E:\빅프로젝트_34조\be_community\bigproject28\community\views.py changed, reloading.
+Watching for file changes with StatReloader
+E:\빅프로젝트_34조\be_community\bigproject28\community\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /community/comment/2/edit/
+Traceback (most recent call last):
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\빅프로젝트_34조\be_community\bigproject28\community\views.py", line 82, in comment_edit
+    return render(request, 'comment_form.html', {'form': form})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: comment_form.html
