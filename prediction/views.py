@@ -20,6 +20,9 @@ def predict_income(request):
 
         # CSV 파일에서 데이터 읽기
         df = pd.read_csv(CSV_FILE_PATH, encoding='utf-8')
+        
+        df['소득률 (%)'] = df['소득률 (%)'].astype(str)
+        df['부가가치율 (%)'] = df['부가가치율 (%)'].astype(str)
 
         total_predicted_value = 0
         crop_results = []
@@ -34,9 +37,20 @@ def predict_income(request):
                 # 토지면적과 작물 비율 적용하여 최종 값을 계산
                 adjusted_income = (crop_income / 302.5) * land_area * crop_ratio
                 total_predicted_value += adjusted_income
+                
+
+                # 각 컬럼 값에 작물 비율과 토지면적 적용
+                adjusted_data = latest_crop_data.copy()
+                for col in adjusted_data.index:
+                    if pd.api.types.is_numeric_dtype(adjusted_data[col]):
+                        adjusted_data[col] = (adjusted_data[col] / 302.5) * land_area * crop_ratio
 
                 # 결과 저장
-                crop_results.append(f"{crop_name}: {int(adjusted_income):,}원")
+                crop_results.append({
+                    'crop_name': crop_name,
+                    'latest_year': latest_year,
+                    'adjusted_data': adjusted_data.to_dict()
+                })
             else:
                 return HttpResponse(f'{crop_name}의 데이터를 찾을 수 없습니다.')
 
