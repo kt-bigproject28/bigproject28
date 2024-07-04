@@ -1639,3 +1639,25 @@ Not Found: /community/post/2/
 Not Found: /community/post/2/
 Forbidden (Origin checking failed - http://localhost:3000 does not match any trusted origins.): /community/post/1/comment/create/
 Forbidden (Origin checking failed - http://localhost:3000 does not match any trusted origins.): /community/post/1/comment/create/
+Watching for file changes with StatReloader
+Not Found: /prediction/
+Bad Request: /login/login/
+E:\빅프로젝트_34조\be_community\bigproject28\login\views.py changed, reloading.
+Watching for file changes with StatReloader
+Bad Request: /login/login/
+Bad Request: /login/login/
+E:\빅프로젝트_34조\be_community\bigproject28\login\views.py changed, reloading.
+Watching for file changes with StatReloader
+Bad Request: /login/login/
+E:\빅프로젝트_34조\be_community\bigproject28\login\views.py changed, reloading.
+Watching for file changes with StatReloader
+Bad Request: /login/login/
+Bad Request: /login/login/
+E:\빅프로젝트_34조\be_community\bigproject28\login\views.py changed, reloading.
+Watching for file changes with StatReloader
+Bad Request: /login/login/
+E:\빅프로젝트_34조\be_community\bigproject28\login\views.py changed, reloading.
+Watching for file changes with StatReloader
+Bad Request: /login/login/
+E:\빅프로젝트_34조\be_community\bigproject28\login\views.py changed, reloading.
+Watching for file changes with StatReloader

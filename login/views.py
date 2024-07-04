@@ -48,20 +48,25 @@ def check_username(request):
     return JsonResponse({'is_taken': is_taken})
 
 
-
-from django.shortcuts import render
-from django.http import JsonResponse
-import json
-
+@csrf_exempt  # Use this decorator if you're handling CSRF tokens manually
 def login(request):
     if request.method == 'GET':
         return render(request, 'login.html')
     elif request.method == 'POST':
         try:
-            data = json.loads(request.body)
+            if request.content_type == 'application/json':
+                data = json.loads(request.body.decode('utf-8'))
+            else:
+                data = request.POST
+
             email = data.get('email')
             password = data.get('password')
+            
+            if not email or not password:
+                return JsonResponse({'status': 'error', 'message': 'Email and password are required.'}, status=400)
+            
             user = authenticate(request, email=email, password=password)
+            
             if user is not None:
                 auth_login(request, user)
                 return JsonResponse({'status': 'success', 'message': 'User authenticated and logged in.'})
@@ -71,9 +76,13 @@ def login(request):
             return JsonResponse({'status': 'error', 'message': 'Invalid email or password'}, status=401)
         except json.JSONDecodeError:
             return JsonResponse({'status': 'error', 'message': 'Invalid JSON'}, status=400)
+        except Exception as e:
+            return JsonResponse({'status': 'error', 'message': f'An error occurred: {str(e)}'}, status=500)
     else:
         # If the method is neither GET nor POST
         return JsonResponse({'status': 'error', 'message': 'Method not allowed'}, status=405)
+
+
 
 
 
