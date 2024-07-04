@@ -1,5 +1,6 @@
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+# login/models.py
 from django.db import models
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 
 class UserManager(BaseUserManager):
     def create_user(self, email, username, password=None):
@@ -22,9 +23,6 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def get_by_natural_key(self, email):
-        return self.get(email=email)
-
 class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True)
     username = models.CharField(max_length=255, unique=True)
@@ -36,21 +34,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
 
+    class Meta:
+        db_table = 'user'
+
     def __str__(self):
         return self.email
-
-    # Custom related_names to avoid clashes
-    groups = models.ManyToManyField(
-        'auth.Group',
-        verbose_name='user groups',
-        blank=True,
-        related_name="custom_user_groups",  # Changed related_name
-        help_text='The groups this user belongs to.'
-    )
-    user_permissions = models.ManyToManyField(
-        'auth.Permission',
-        verbose_name='user permissions',
-        blank=True,
-        related_name="custom_user_permissions",  # Changed related_name
-        help_text='Specific permissions for this user.'
-    )

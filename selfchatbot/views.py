@@ -58,26 +58,20 @@ def chatbot(request):
 
                 timestamp = timezone.now()
 
-                # Chatbot.objects.create(
-                #     user_id=request.user.id if request.user.is_authenticated else None,
-                #     session_id=request.session.session_key,
-                #     question_content=query,
-                #     answer_content=answer,
-                #     created_at=timestamp
-                # )
+                Chatbot.objects.create(
+                    user_id=request.user.id if request.user.is_authenticated else None,
+                    session_id=request.session.session_key,
+                    question_content=query,
+                    answer_content=answer,
+                    created_at=timestamp
+                )
 
-                logs = request.session.get('logs', [])
-                logs.append({
-                    'question': query,
-                    'answer': answer,
-                    'timestamp': timestamp.strftime('%Y-%m-%d %H:%M:%S')
-                })
-
-                request.session['logs'] = logs
-
+                conversations = Chatbot.objects.filter(session_id=request.session.session_key).order_by('created_at')
+    
                 context = {
-                    'logs': logs
+                    'logs': conversations
                 }
+                
                 return render(request, 'result.html', context)
 
             except Exception as e:
@@ -97,7 +91,8 @@ def error_page(request):
 
 def chat_clear_logs(request):
     if request.method == 'POST':
-        request.session['logs'] = []
+        # 데이터베이스에서 해당 세션의 대화 로그 삭제
+        Chatbot.objects.filter(session_id=request.session.session_key).delete()
         return redirect('selfchatbot:chat_page')
     else:
         return HttpResponse(status=405)

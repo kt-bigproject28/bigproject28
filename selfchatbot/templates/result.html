@@ -12,9 +12,9 @@
     <ul>
         {% for log in logs %}
             <li>
-                <strong>Question:</strong> {{ log.question }} <br>
-                <strong>Answer:</strong> {{ log.answer }} <br>
-                <strong>Timestamp:</strong> {{ log.timestamp }}
+                <strong>Question:</strong> {{ log.question_content }} <br>
+                <strong>Answer:</strong> {{ log.answer_content }} <br>
+                <strong>Timestamp:</strong> {{ log.created_at }}
             </li>
         {% endfor %}
     </ul>
