@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
+import axios from "axios";
 
 const Container = styled.div`
   display: flex;
@@ -174,23 +175,43 @@ const posts = [
 
 const PostDetailTemplate = () => {
   const { id } = useParams();
-  const post = posts.find((post) => post.id === parseInt(id));
-
-  const [newComment, setNewComment] = useState("");
+  const [post, setPost] = useState(null);
   const [comments, setComments] = useState([]);
+  const [newComment, setNewComment] = useState("");
+
+  useEffect(() => {
+    const fetchPost = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:8000/community/post/${id}/`
+        );
+        setPost(response.data);
+        setComments(response.data.comments || []);
+      } catch (error) {
+        console.error("Failed to fetch post", error);
+      }
+    };
+    fetchPost();
+  }, [id]);
 
   const handleCommentChange = (event) => {
     setNewComment(event.target.value);
   };
 
-  const handleSubmitComment = (event) => {
+  const handleSubmitComment = async (event) => {
     event.preventDefault();
-    const comment = {
-      author: "사용자", // 실제로는 로그인 정보나 다른 식별자를 이용해야 할 수 있습니다.
-      content: newComment,
-    };
-    setComments([...comments, comment]);
-    setNewComment("");
+    try {
+      const response = await axios.post(
+        `http://localhost:8000/community/post/${id}/comment/create/`,
+        {
+          content: newComment,
+        }
+      );
+      setComments([...comments, response.data]);
+      setNewComment("");
+    } catch (error) {
+      console.error("Failed to post comment", error);
+    }
   };
 
   if (!post) {
@@ -201,16 +222,18 @@ const PostDetailTemplate = () => {
     <Container>
       <Title>{post.title}</Title>
       <PostMeta>
-        <span>작성자: {post.author}</span>
-        <span>작성일: {post.date}</span>
+        <span>작성자: {post.user}</span>
+        <span>작성일: {post.creation_date}</span>
       </PostMeta>
       <PostContent>{post.content}</PostContent>
 
       <CommentList>
         {comments.map((comment, index) => (
           <CommentItem key={index}>
-            <CommentAuthor>{comment.author}</CommentAuthor>
-            <CommentContent>{comment.content}</CommentContent>
+            <CommentAuthor>{comment.user}</CommentAuthor>
+            <CommentContent>
+              {comment.content} - {comment.created_at}
+            </CommentContent>
           </CommentItem>
         ))}
       </CommentList>

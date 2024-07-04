@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { FaUserAlt, FaCalendarAlt } from "react-icons/fa";
 
 const Container = styled.div`
   display: flex;
@@ -16,7 +15,6 @@ const Title = styled.h1`
   padding: 16px 0;
   border-bottom: 2px solid #4aaa87;
   margin-bottom: 16px;
-  text-align: center;
 `;
 
 const SearchBar = styled.input`
@@ -89,7 +87,6 @@ const MetaIcon = styled.div`
   display: flex;
   font-size: 9px;
   font-weight: 500;
-  align-items: center;
   color: #black;
 `;
 
