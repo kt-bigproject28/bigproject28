@@ -2,6 +2,7 @@ import pandas as pd
 from django.shortcuts import render
 from django.http import HttpResponse
 
+
 # CSV 파일 경로
 CSV_FILE_PATH = 'prediction/all_crop_data.csv'
 
@@ -35,7 +36,7 @@ def predict_income(request):
                 total_predicted_value += adjusted_income
 
                 # 결과 저장
-                crop_results.append(f"{crop_name}: {adjusted_income:.2f} (시점: {latest_year})")
+                crop_results.append(f"{crop_name}: {int(adjusted_income):,}원")
             else:
                 return HttpResponse(f'{crop_name}의 데이터를 찾을 수 없습니다.')
 

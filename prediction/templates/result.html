@@ -5,12 +5,13 @@
     <title>Prediction Result</title>
 </head>
 <body>
+    {% load humanize %}
     <h1>예측 소득 결과</h1>
     <ul>
         {% for result in results %}
             <li>{{ result }}</li>
         {% endfor %}
     </ul>
-    <h2>총 소득 결과: {{ total_income|floatformat:2 }} 원</h2>
+    <h2>총 소득 결과: {{ total_income|floatformat:0|intcomma }}원</h2>
 </body>
 </html>
