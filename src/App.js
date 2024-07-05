@@ -7,11 +7,15 @@ import SellBoardPage from "./pages/SellBoardPage";
 import MyBoardPage from "./pages/MyBoardPage";
 import PostDetailPage from "./pages/PostDetailPage";
 import WritePostPage from "./pages/WritePostPage";
-
+import SignupTemplate from "./components/templates/SignupTemplate";
+import LoginTemplate from "./components/templates/LoginTemplate";
+import React, { useState, useEffect } from "react";
 function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/signup" element={<SignupTemplate />} />
+        <Route path="/login" element={<LoginTemplate />} />"
         <Route element={<MainLayout />}>
           <Route path="/" element={<MainPage />} />
           <Route path="board" element={<BoardPage />} />
