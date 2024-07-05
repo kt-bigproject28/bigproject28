@@ -1,5 +1,79 @@
 import React, { useState } from "react";
-import {loginUser} from "../../apis/user";
+import styled from "styled-components";
+import { loginUser } from "../../apis/user";
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px;
+  background-color: #f9f9f9;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+`;
+
+const Title = styled.h1`
+  font-size: 24px;
+  margin-bottom: 32px;
+  color: #333;
+`;
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 600px;
+  background-color: white;
+  padding: 24px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+`;
+
+const InputGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 24px;
+`;
+
+const Label = styled.label`
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 8px;
+`;
+
+const Input = styled.input`
+  font-size: 14px;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  &:focus {
+    outline: none;
+    border-color: #2faa9a;
+  }
+`;
+
+const Button = styled.button`
+  padding: 12px 16px;
+  font-size: 16px;
+  font-weight: bold;
+  height: 44px; /* Adjust height to match input field */
+  color: white;
+  background-color: #2faa9a;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  &:hover {
+    background-color: #6dc4b0;
+  }
+`;
+
+const ErrorMessage = styled.div`
+  color: red;
+  font-size: 12px;
+  margin-top: 4px;
+`;
 
 const LoginTemplate = () => {
   const [formData, setFormData] = useState({
@@ -48,43 +122,39 @@ const LoginTemplate = () => {
   };
 
   return (
-    <div className="container mt-5">
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="email">Email:</label>
-          <input
+    <Container>
+      <Title>로그인</Title>
+      <Form onSubmit={handleSubmit}>
+        <InputGroup>
+          <Label htmlFor="email">이메일</Label>
+          <Input
             type="email"
-            className="form-control"
             id="email"
             name="email"
             value={formData.email}
             onChange={handleChange}
+            placeholder="이메일 입력"
             required
           />
-          {emailError && <div className="alert alert-danger">{emailError}</div>}
-        </div>
-        <div className="form-group">
-          <label htmlFor="password">Password:</label>
-          <input
+          {emailError && <ErrorMessage>{emailError}</ErrorMessage>}
+        </InputGroup>
+        <InputGroup>
+          <Label htmlFor="password">비밀번호</Label>
+          <Input
             type="password"
-            className="form-control"
             id="password"
             name="password"
             value={formData.password}
             onChange={handleChange}
+            placeholder="비밀번호 입력"
             required
           />
-          {passwordError && (
-            <div className="alert alert-danger">{passwordError}</div>
-          )}
-        </div>
-        {loginError && <div className="alert alert-danger">{loginError}</div>}
-        <button type="submit" className="btn btn-primary btn-block">
-          Login
-        </button>
-      </form>
-    </div>
+          {passwordError && <ErrorMessage>{passwordError}</ErrorMessage>}
+        </InputGroup>
+        {loginError && <ErrorMessage>{loginError}</ErrorMessage>}
+        <Button type="submit">로그인</Button>
+      </Form>
+    </Container>
   );
 };
 
