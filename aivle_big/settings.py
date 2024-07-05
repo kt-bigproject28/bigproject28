@@ -1,3 +1,4 @@
+# settings.py
 """
 Django settings for aivle_big project.
 
@@ -12,7 +13,10 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 import os
+from dotenv import load_dotenv
+import os
 
+load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -38,12 +42,16 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    'rest_framework',
     "login",
-    "detect",
+    "detect"
+    # "community",
+    # 'corsheaders'
     
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -73,22 +81,32 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "aivle_big.wsgi.application"
 
+# CORS_ALLOW_ALL_ORIGINS = True
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
+from decouple import config
+
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv('DATABASE_NAME', 'big_project'),
+        'USER': os.getenv('DATABASE_USER', 'postgres'),
+        'PASSWORD': os.getenv('DATABASE_PASSWORD', 'aivle202405!'),
+        'HOST': os.getenv('DATABASE_HOST', 'db-server.cp0ii2ks659o.ap-northeast-2.rds.amazonaws.com'),
+        'PORT': os.getenv('DATABASE_PORT', '5432'),
+        'OPTIONS': {
+            'options': '-c client_encoding=UTF8',
+        },
     },
-    'detect_db': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'detectdb.sqlite3',
-    }
 }
 
-DATABASE_ROUTERS = ['detect.routers.DetectAppRouter']
+DATABASE_ROUTERS = ['aivle_big.routers.SchemaRouter']
+
+AUTH_USER_MODEL = 'login.User'
+
 
 
 # Password validation
@@ -109,31 +127,67 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+]
+
+import os
+from dotenv import load_dotenv
+load_dotenv()
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = os.getenv('EMAIL_HOST')
+EMAIL_PORT = int(os.getenv('EMAIL_PORT'))
+EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS') == 'True'
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = 'iatu rajv ubti lkkv'#os.getenv('EMAIL_HOST_PASSWORD')
+DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL')
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
+# LANGUAGE_CODE = 'en-us'
 LANGUAGE_CODE = 'ko-kr'
 
+# TIME_ZONE = 'UTC'
 TIME_ZONE = 'Asia/Seoul'
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = "static/"
+STATIC_URL = '/static/'
 
+# Add these lines if they are not already present
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
+    BASE_DIR / "static",
 ]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+        },
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': BASE_DIR / 'debug.log',
+        },
+    },
+    'root': {
+        'handlers': ['console', 'file'],
+        'level': 'DEBUG',
+    },
+}

@@ -1,0 +1,91 @@
+Falling back to TensorFlow client; we recommended you install the Cloud TPU client directly with pip install cloud-tpu-client.
+Creating converter from 7 to 5
+Creating converter from 5 to 7
+Creating converter from 7 to 5
+Creating converter from 5 to 7
+Creating converter from 3 to 5
+No training configuration found in the save file, so the model was *not* compiled. Compile it manually.
+Falling back to TensorFlow client; we recommended you install the Cloud TPU client directly with pip install cloud-tpu-client.
+Creating converter from 7 to 5
+Creating converter from 5 to 7
+Creating converter from 7 to 5
+Creating converter from 5 to 7
+Creating converter from 3 to 5
+No training configuration found in the save file, so the model was *not* compiled. Compile it manually.
+Falling back to TensorFlow client; we recommended you install the Cloud TPU client directly with pip install cloud-tpu-client.
+Creating converter from 7 to 5
+Creating converter from 5 to 7
+Creating converter from 7 to 5
+Creating converter from 5 to 7
+Creating converter from 3 to 5
+No training configuration found in the save file, so the model was *not* compiled. Compile it manually.
+Falling back to TensorFlow client; we recommended you install the Cloud TPU client directly with pip install cloud-tpu-client.
+Creating converter from 7 to 5
+Creating converter from 5 to 7
+Creating converter from 7 to 5
+Creating converter from 5 to 7
+Creating converter from 3 to 5
+No training configuration found in the save file, so the model was *not* compiled. Compile it manually.
+Falling back to TensorFlow client; we recommended you install the Cloud TPU client directly with pip install cloud-tpu-client.
+Creating converter from 7 to 5
+Creating converter from 5 to 7
+Creating converter from 7 to 5
+Creating converter from 5 to 7
+Creating converter from 3 to 5
+No training configuration found in the save file, so the model was *not* compiled. Compile it manually.
+Falling back to TensorFlow client; we recommended you install the Cloud TPU client directly with pip install cloud-tpu-client.
+Creating converter from 7 to 5
+Creating converter from 5 to 7
+Creating converter from 7 to 5
+Creating converter from 5 to 7
+Creating converter from 3 to 5
+No training configuration found in the save file, so the model was *not* compiled. Compile it manually.
+Watching for file changes with StatReloader
+Importing BlpImagePlugin
+Importing BmpImagePlugin
+Importing BufrStubImagePlugin
+Importing CurImagePlugin
+Importing DcxImagePlugin
+Importing DdsImagePlugin
+Importing EpsImagePlugin
+Importing FitsImagePlugin
+Importing FliImagePlugin
+Importing FpxImagePlugin
+Image: failed to import FpxImagePlugin: No module named 'olefile'
+Importing FtexImagePlugin
+Importing GbrImagePlugin
+Importing GifImagePlugin
+Importing GribStubImagePlugin
+Importing Hdf5StubImagePlugin
+Importing IcnsImagePlugin
+Importing IcoImagePlugin
+Importing ImImagePlugin
+Importing ImtImagePlugin
+Importing IptcImagePlugin
+Importing JpegImagePlugin
+Importing Jpeg2KImagePlugin
+Importing McIdasImagePlugin
+Importing MicImagePlugin
+Image: failed to import MicImagePlugin: No module named 'olefile'
+Importing MpegImagePlugin
+Importing MpoImagePlugin
+Importing MspImagePlugin
+Importing PalmImagePlugin
+Importing PcdImagePlugin
+Importing PcxImagePlugin
+Importing PdfImagePlugin
+Importing PixarImagePlugin
+Importing PngImagePlugin
+Importing PpmImagePlugin
+Importing PsdImagePlugin
+Importing QoiImagePlugin
+Importing SgiImagePlugin
+Importing SpiderImagePlugin
+Importing SunImagePlugin
+Importing TgaImagePlugin
+Importing TiffImagePlugin
+Importing WebPImagePlugin
+Importing WmfImagePlugin
+Importing XbmImagePlugin
+Importing XpmImagePlugin
+Importing XVThumbImagePlugin
