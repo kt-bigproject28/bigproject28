@@ -1,9 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
-
-axios.defaults.withCredentials = true;
-axios.defaults.xsrfCookieName = "csrftoken";
-axios.defaults.xsrfHeaderName = "X-CSRFToken";
+import { checkUsername, sendVerificationEmail, signupUser } from "../../apis/user"
 
 const SignupTemplate = () => {
   const [formData, setFormData] = useState({
@@ -26,27 +22,9 @@ const SignupTemplate = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  // CSRF 토큰을 가져오는 함수
-  const getCookie = (name) => {
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== "") {
-      const cookies = document.cookie.split(";");
-      for (let i = 0; i < cookies.length; i++) {
-        const cookie = cookies[i].trim();
-        if (cookie.startsWith(name + "=")) {
-          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-          break;
-        }
-      }
-    }
-    return cookieValue;
-  };
-
   const handleUsernameCheck = () => {
     const username = formData.username;
-
-    axios
-      .get(`http://localhost:8000/login/check_username/?username=${username}`)
+    checkUsername(username)
       .then((response) => {
         if (response.data.is_taken) {
           setUsernameError("This username is already taken.");
@@ -61,10 +39,7 @@ const SignupTemplate = () => {
 
   const handleSendVerificationCode = () => {
     const email = formData.email;
-    axios
-      .post(`http://localhost:8000/login/send_verification_email/`, {
-        email: email,
-      })
+    sendVerificationEmail(email)
       .then((response) => {
         setVerificationCodeSent(true);
         setVerificationCodeError("");
@@ -80,26 +55,8 @@ const SignupTemplate = () => {
     e.preventDefault();
     const { username, email, verification_code, password1, password2 } =
       formData;
-    const csrftoken = getCookie("csrftoken");
 
-    axios
-      .post(
-        `http://localhost:8000/login/signup/`,
-        {
-          username: username,
-          email: email,
-          verification_code: verification_code,
-          password1: password1,
-          password2: password2,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "X-CSRFToken": csrftoken, // CSRF 토큰을 가져와서 헤더에 설정
-          },
-          withCredentials: true,
-        }
-      )
+    signupUser({ username, email, verification_code, password1, password2 })
       .then((response) => {
         console.log(response.data);
         // Handle successful signup, e.g., redirect or show success message

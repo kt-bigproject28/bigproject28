@@ -1,8 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
-
-axios.defaults.xsrfCookieName = "csrftoken";
-axios.defaults.xsrfHeaderName = "X-CSRFToken";
+import {loginUser} from "../../apis/user";
 
 const LoginTemplate = () => {
   const [formData, setFormData] = useState({
@@ -19,40 +16,11 @@ const LoginTemplate = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const getCookie = (name) => {
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== "") {
-      const cookies = document.cookie.split(";");
-      for (let i = 0; i < cookies.length; i++) {
-        const cookie = cookies[i].trim();
-        // Does this cookie string begin with the name we want?
-        if (cookie.substring(0, name.length + 1) === name + "=") {
-          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-          break;
-        }
-      }
-    }
-    return cookieValue;
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     const { email, password } = formData;
 
-    const csrftoken = getCookie("csrftoken");
-
-    axios
-      .post(
-        `http://localhost:8000/login/login/`,
-        { email, password },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "X-CSRFToken": csrftoken,
-          },
-          withCredentials: true,
-        }
-      )
+    loginUser(email, password)
       .then((response) => {
         console.log(response.data);
         const { status, message, user } = response.data;
