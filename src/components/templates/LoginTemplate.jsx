@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
-import { loginUser } from "../../apis/user";
+import React, { useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
 
 const Container = styled.div`
   display: flex;
@@ -96,16 +96,16 @@ const LoginTemplate = () => {
     e.preventDefault();
     const { email, password } = formData;
 
-    loginUser(email, password)
+    axios.post('http://localhost:8000/login/login/', { email, password })
       .then((response) => {
-        console.log(response.data);
-        const { status, message, access, refresh } = response.data;
+        const { status, message, access, refresh, user_id } = response.data;
         if (status === "success") {
-          // 토큰을 로컬 스토리지에 저장
+          // 사용자 정보를 로컬 스토리지에 저장
           localStorage.setItem("accessToken", access);
           localStorage.setItem("refreshToken", refresh);
+          localStorage.setItem("userId", user_id);
           // 로그인 후의 동작을 정의, 예: 리다이렉트
-          navigate("/");
+          navigate('/');
         } else {
           setLoginError(message);
         }
