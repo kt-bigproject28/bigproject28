@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
+import { fetchChatHistory, sendChatMessage } from '../../apis/chat';
 
 const Container = styled.div`
   display: flex;
@@ -86,13 +86,9 @@ const ChatPage = () => {
 
   useEffect(() => {
     localStorage.setItem('sessionId', sessionId);
-    const fetchChatHistory = async () => {
+    const fetchHistory = async () => {
       try {
-        const response = await axios.get(`http://localhost:8000/selfchatbot/chat_history/${sessionId}/`, {
-          headers: {
-            'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
-          }
-        });
+        const response = await fetchChatHistory(sessionId);
         setMessages(response.data.map(chat => ({
           isUser: true,
           text: chat.question,
@@ -107,23 +103,8 @@ const ChatPage = () => {
       }
     };
 
-    fetchChatHistory();
+    fetchHistory();
   }, [sessionId]);
-
-  const getCookie = (name) => {
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-      const cookies = document.cookie.split(';');
-      for (let i = 0; i < cookies.length; i++) {
-        const cookie = cookies[i].trim();
-        if (cookie.substring(0, name.length + 1) === (name + '=')) {
-          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-          break;
-        }
-      }
-    }
-    return cookieValue;
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -134,18 +115,10 @@ const ChatPage = () => {
     };
     setMessages([...messages, userMessage]);
 
-    const csrftoken = getCookie('csrftoken');
-    const accessToken = localStorage.getItem('accessToken');
-    const userId = localStorage.getItem('userId');
+    const messageData = { question: inputValue, session_id: sessionId, user_id: localStorage.getItem('userId') };
 
     try {
-      const response = await axios.post('http://localhost:8000/selfchatbot/chatbot/', { question: inputValue, session_id: sessionId, user_id: userId }, {
-        headers: {
-          'X-CSRFToken': csrftoken,
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${accessToken}`
-        }
-      });
+      const response = await sendChatMessage(messageData);
       const botMessage = {
         isUser: false,
         text: response.data.answer,

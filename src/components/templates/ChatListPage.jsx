@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import styled from 'styled-components';
 import { v4 as uuidv4 } from 'uuid';
 import { useNavigate } from 'react-router-dom';
+import { fetchChatSessions } from '../../apis/chat';
 
 const Container = styled.div`
   display: flex;
@@ -61,20 +61,16 @@ const ChatListPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchChatSessions = async () => {
+    const fetchSessions = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/selfchatbot/chat_sessions/', {
-          headers: {
-            'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
-          }
-        });
+        const response = await fetchChatSessions();
         setChatSessions(response.data);
       } catch (error) {
         console.error('Error fetching chat sessions:', error);
       }
     };
 
-    fetchChatSessions();
+    fetchSessions();
   }, []);
 
   const startNewChat = () => {
