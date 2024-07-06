@@ -86,7 +86,7 @@ const ChatListPage = () => {
 
   return (
     <Container>
-      <Title>Chat Sessions</Title>
+      <Title>대화 목록</Title>
       <ChatList>
         {chatSessions.map(session => (
           <ChatListItem key={session.session_id} onClick={() => openChat(session.session_id)}>
@@ -94,7 +94,7 @@ const ChatListPage = () => {
           </ChatListItem>
         ))}
       </ChatList>
-      <Button onClick={startNewChat}>Start New Chat</Button>
+      <Button onClick={startNewChat}>새 대화 생성</Button>
     </Container>
   );
 };
