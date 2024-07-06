@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   FaHome,
   FaMapMarkedAlt,
@@ -53,6 +53,7 @@ const ChatIconWrapper = styled.div`
   align-items: center;
   margin-top: -40px;
   z-index: 1;
+  cursor: pointer;
 `;
 
 const ChatIcon = styled(FaCommentDots)`
@@ -63,10 +64,15 @@ const ChatIcon = styled(FaCommentDots)`
 export const GNB = () => {
   const [currentPage, setCurrentPage] = useState("/");
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     setCurrentPage(location.pathname);
   }, [location]);
+
+  const handleChatIconClick = () => {
+    navigate("/chatlist");
+  };
 
   return (
     <Nav>
@@ -83,7 +89,10 @@ export const GNB = () => {
           </IconWrapper>
           <MenuText isActive={currentPage === "/map"}>토양</MenuText>
         </MenuLink>
-        <ChatIconWrapper isActive={currentPage === "/chat"}>
+        <ChatIconWrapper
+          isActive={currentPage === "/chatlist"}
+          onClick={handleChatIconClick}
+        >
           <ChatIcon />
         </ChatIconWrapper>
         <MenuLink

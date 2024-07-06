@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+import { useParams } from 'react-router-dom';
 
 const Container = styled.div`
   display: flex;
@@ -78,8 +79,36 @@ const Button = styled.button`
 `;
 
 const ChatPage = () => {
+  const { sessionid } = useParams();
   const [messages, setMessages] = useState([]);
   const [inputValue, setInputValue] = useState('');
+  const [sessionId, setSessionId] = useState(sessionid);
+
+  useEffect(() => {
+    localStorage.setItem('sessionId', sessionId);
+    const fetchChatHistory = async () => {
+      try {
+        const response = await axios.get(`http://localhost:8000/selfchatbot/chat_history/${sessionId}/`, {
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
+          }
+        });
+        setMessages(response.data.map(chat => ({
+          isUser: true,
+          text: chat.question,
+          timestamp: chat.timestamp
+        })).concat(response.data.map(chat => ({
+          isUser: false,
+          text: chat.answer,
+          timestamp: chat.timestamp
+        }))));
+      } catch (error) {
+        console.error('Error fetching chat history:', error);
+      }
+    };
+
+    fetchChatHistory();
+  }, [sessionId]);
 
   const getCookie = (name) => {
     let cookieValue = null;
@@ -110,7 +139,7 @@ const ChatPage = () => {
     const userId = localStorage.getItem('userId');
 
     try {
-      const response = await axios.post('http://localhost:8000/selfchatbot/chatbot/', { question: inputValue, user_id: userId }, {
+      const response = await axios.post('http://localhost:8000/selfchatbot/chatbot/', { question: inputValue, session_id: sessionId, user_id: userId }, {
         headers: {
           'X-CSRFToken': csrftoken,
           'Content-Type': 'application/json',
@@ -137,12 +166,12 @@ const ChatPage = () => {
 
   return (
     <Container>
-      <Title>Chat with GPT</Title>
+      <Title>농업 GPT</Title>
       <ChatBox>
         <MessageList>
           {messages.map((msg, index) => (
             <Message key={index} isUser={msg.isUser}>
-              <strong>{msg.isUser ? 'You' : 'Bot'}:</strong> {msg.text}
+              <strong>{msg.isUser ? '사용자' : '답변'}:</strong> {msg.text}
               <br />
               <small>{new Date(msg.timestamp).toLocaleTimeString()}</small>
             </Message>
@@ -154,10 +183,10 @@ const ChatPage = () => {
           type="text"
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
-          placeholder="Type your question..."
+          placeholder="질문을 입력하세요"
           required
         />
-        <Button type="submit">Ask</Button>
+        <Button type="submit">전송</Button>
       </InputBox>
     </Container>
   );
