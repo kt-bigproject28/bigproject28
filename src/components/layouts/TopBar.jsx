@@ -30,13 +30,15 @@ const TopBarButton = styled.button`
   padding: 8px 20px;
   background-color: #4aaa87;
   color: #ffffff;
-  font-weight: bold;
+  font-family: 'Freesentation', sans-serif;
+  font-weight: 600; /* SemiBold */
   border: none;
   border-radius: 4px;
   font-size: 16px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   cursor: pointer;
 `;
+
 
 const TopBar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
