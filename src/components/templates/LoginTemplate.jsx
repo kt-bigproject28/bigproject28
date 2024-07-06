@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { loginUser } from "../../apis/user";
 
@@ -84,6 +85,7 @@ const LoginTemplate = () => {
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [loginError, setLoginError] = useState("");
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -97,15 +99,13 @@ const LoginTemplate = () => {
     loginUser(email, password)
       .then((response) => {
         console.log(response.data);
-        const { status, message, user } = response.data;
+        const { status, message, access, refresh } = response.data;
         if (status === "success") {
-          // 사용자 정보를 로컬 스토리지에 저장
-          localStorage.setItem("user", JSON.stringify(user));
+          // 토큰을 로컬 스토리지에 저장
+          localStorage.setItem("accessToken", access);
+          localStorage.setItem("refreshToken", refresh);
           // 로그인 후의 동작을 정의, 예: 리다이렉트
-          console.log("User logged in successfully:", user);
-
-          // 쿠키 정보 콘솔에 출력
-          console.log("Cookies:", document.cookie);
+          navigate("/");
         } else {
           setLoginError(message);
         }

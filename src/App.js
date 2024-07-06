@@ -1,4 +1,5 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
 import MainPage from "./pages/MainPage";
 import { MainLayout } from "./components/layouts/MainLayout";
 import BoardPage from "./pages/BoardPage";
@@ -9,14 +10,15 @@ import PostDetailPage from "./pages/PostDetailPage";
 import WritePostPage from "./pages/WritePostPage";
 import SignupTemplate from "./components/templates/SignupTemplate";
 import LoginTemplate from "./components/templates/LoginTemplate";
-import React, { useState, useEffect } from "react";
+
 function App() {
+
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/signup" element={<SignupTemplate />} />
-        <Route path="/login" element={<LoginTemplate />} />"
-        <Route element={<MainLayout />}>
+        <Route path="/login" element={<LoginTemplate />} />
+        <Route element={<MainLayout/>}>
           <Route path="/" element={<MainPage />} />
           <Route path="board" element={<BoardPage />} />
           <Route path="buyboard" element={<BuyBoardPage />} />
@@ -29,4 +31,5 @@ function App() {
     </BrowserRouter>
   );
 }
+
 export default App;
