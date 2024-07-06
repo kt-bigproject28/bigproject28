@@ -10,6 +10,7 @@ import PostDetailPage from "./pages/PostDetailPage";
 import WritePostPage from "./pages/WritePostPage";
 import SignupTemplate from "./components/templates/SignupTemplate";
 import LoginTemplate from "./components/templates/LoginTemplate";
+import ChatPage from "./components/templates/ChatPage";
 
 function App() {
 
@@ -26,6 +27,7 @@ function App() {
           <Route path="myboard" element={<MyBoardPage />} />
           <Route path="post/:id" element={<PostDetailPage />} />
           <Route path="post/write" element={<WritePostPage />} />
+          <Route path="/chat" element={<ChatPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
