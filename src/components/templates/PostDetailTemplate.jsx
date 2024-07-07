@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
-import axios from "axios";
+import {instance} from "../../apis/instance"
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-
   padding: 16px;
   background-color: #f9f9f9;
   height: 100%;
@@ -63,6 +62,20 @@ const CommentContent = styled.div`
   color: #555;
 `;
 
+const CommentActions = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 4px;
+
+  button {
+    background: none;
+    border: none;
+    color: #4aaa87;
+    cursor: pointer;
+  }
+`;
+
 const CommentForm = styled.form``;
 
 const CommentTextarea = styled.textarea`
@@ -93,98 +106,18 @@ const CommentButton = styled.button`
   }
 `;
 
-const posts = [
-  {
-    id: 1,
-    title: "쌀 구매합니다",
-    author: "홍길동",
-    date: "2024-06-30",
-    content: "신선한 쌀을 구매합니다. 10킬로그램 정도 필요합니다. 연락주세요.",
-  },
-  {
-    id: 2,
-    title: "감자 구매합니다",
-    author: "김철수",
-    date: "2024-06-29",
-    content:
-      "양질의 감자를 구매하고자 합니다. 5킬로그램 필요합니다. 연락 부탁드립니다.",
-  },
-  {
-    id: 3,
-    title: "당근 구매합니다",
-    author: "이영희",
-    date: "2024-06-28",
-    content: "신선한 당근을 구매합니다. 3킬로그램 정도 필요합니다. 연락주세요.",
-  },
-  {
-    id: 4,
-    title: "고구마 구매합니다",
-    author: "박민수",
-    date: "2024-06-27",
-    content:
-      "고구마를 구매하고자 합니다. 7킬로그램 정도 필요합니다. 연락주세요.",
-  },
-  {
-    id: 5,
-    title: "양파 구매합니다",
-    author: "최영희",
-    date: "2024-06-26",
-    content: "양파를 구매합니다. 4킬로그램 필요합니다. 연락 부탁드립니다.",
-  },
-  {
-    id: 6,
-    title: "수박 구매합니다",
-    author: "김민수",
-    date: "2024-06-25",
-    content:
-      "수박을 1통 구매하고 싶습니다. 상태 좋은 수박 필요합니다. 연락주세요.",
-  },
-  {
-    id: 7,
-    title: "토마토 구매합니다",
-    author: "이철수",
-    date: "2024-06-24",
-    content:
-      "토마토를 2kg 구매하고 싶습니다. 신선한 상태로 필요합니다. 연락주세요.",
-  },
-  {
-    id: 8,
-    title: "딸기 구매합니다",
-    author: "박영희",
-    date: "2024-06-23",
-    content:
-      "딸기를 1kg 구매하고 싶습니다. 신선한 딸기 필요합니다. 연락주세요.",
-  },
-  {
-    id: 9,
-    title: "배추 구매합니다",
-    author: "최철수",
-    date: "2024-06-22",
-    content:
-      "배추를 5포기 구매하고 싶습니다. 좋은 품질의 배추 원합니다. 연락주세요.",
-  },
-  {
-    id: 10,
-    title: "오이 구매합니다",
-    author: "김영희",
-    date: "2024-06-21",
-    content:
-      "오이를 10개 구매하고 싶습니다. 신선한 상태로 필요합니다. 연락주세요.",
-  },
-];
-
 const PostDetailTemplate = () => {
   const { id } = useParams();
   const [post, setPost] = useState(null);
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
+  const [editCommentId, setEditCommentId] = useState(null);
+  const [editCommentContent, setEditCommentContent] = useState("");
 
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const response = await axios.get(
-          `http://localhost:8000/community/post/${id}/`
-        );
+        const response = await instance.get(`community/post/${id}/`);
         setPost(response.data);
         setComments(response.data.comments || []);
       } catch (error) {
@@ -198,11 +131,15 @@ const PostDetailTemplate = () => {
     setNewComment(event.target.value);
   };
 
+  const handleEditCommentChange = (event) => {
+    setEditCommentContent(event.target.value);
+  };
+
   const handleSubmitComment = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post(
-        `http://localhost:8000/community/post/${id}/comment/create/`,
+      const response = await instance.post(
+        `community/post/${id}/comment/create/`,
         {
           content: newComment,
         }
@@ -214,6 +151,35 @@ const PostDetailTemplate = () => {
     }
   };
 
+  const handleEditComment = async (commentId) => {
+    try {
+      const response = await instance.post(
+        `community/comment/${commentId}/edit/`,
+        {
+          content: editCommentContent,
+        }
+      );
+      setComments(
+        comments.map((comment) =>
+          comment.id === commentId ? response.data : comment
+        )
+      );
+      setEditCommentId(null);
+      setEditCommentContent("");
+    } catch (error) {
+      console.error("Failed to edit comment", error);
+    }
+  };
+
+  const handleDeleteComment = async (commentId) => {
+    try {
+      await instance.post(`community/comment/${commentId}/delete/`);
+      setComments(comments.filter((comment) => comment.id !== commentId));
+    } catch (error) {
+      console.error("Failed to delete comment", error);
+    }
+  };
+
   if (!post) {
     return <Container>게시글을 찾을 수 없습니다.</Container>;
   }
@@ -222,18 +188,39 @@ const PostDetailTemplate = () => {
     <Container>
       <Title>{post.title}</Title>
       <PostMeta>
-        <span>작성자: {post.user}</span>
-        <span>작성일: {post.creation_date}</span>
+        <span>작성자: {post.user_id}</span>
+        <span>작성일: {new Date(post.creation_date).toLocaleDateString()}</span>
       </PostMeta>
       <PostContent>{post.content}</PostContent>
 
       <CommentList>
-        {comments.map((comment, index) => (
-          <CommentItem key={index}>
-            <CommentAuthor>{comment.user}</CommentAuthor>
-            <CommentContent>
-              {comment.content} - {comment.created_at}
-            </CommentContent>
+        {comments.map((comment) => (
+          <CommentItem key={comment.id}>
+            <CommentAuthor>{comment.user_id}</CommentAuthor>
+            {editCommentId === comment.id ? (
+              <CommentTextarea
+                rows="2"
+                value={editCommentContent}
+                onChange={handleEditCommentChange}
+              />
+            ) : (
+              <CommentContent>{comment.content}</CommentContent>
+            )}
+            <CommentActions>
+              {editCommentId === comment.id ? (
+                <button onClick={() => handleEditComment(comment.id)}>저장</button>
+              ) : (
+                <button
+                  onClick={() => {
+                    setEditCommentId(comment.id);
+                    setEditCommentContent(comment.content);
+                  }}
+                >
+                  수정
+                </button>
+              )}
+              <button onClick={() => handleDeleteComment(comment.id)}>삭제</button>
+            </CommentActions>
           </CommentItem>
         ))}
       </CommentList>

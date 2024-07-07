@@ -12,12 +12,14 @@ import SignupTemplate from "./components/templates/SignupTemplate";
 import LoginTemplate from "./components/templates/LoginTemplate";
 import ChatPage from "./components/templates/ChatPage";
 import ChatListPage from "./components/templates/ChatListPage";
+import AuthCheck from "./components/templates/Authcheck";
 
 function App() {
 
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/auth" element={<AuthCheck />}/>
         <Route path="/signup" element={<SignupTemplate />} />
         <Route path="/login" element={<LoginTemplate />} />
         <Route element={<MainLayout/>}>
@@ -27,7 +29,7 @@ function App() {
           <Route path="sellboard" element={<SellBoardPage />} />
           <Route path="myboard" element={<MyBoardPage />} />
           <Route path="post/:id" element={<PostDetailPage />} />
-          <Route path="post/write" element={<WritePostPage />} />
+          <Route path="post/create" element={<WritePostPage />} />
           <Route path="chatlist" element={<ChatListPage />} />
           <Route path={"chat/:sessionid"} element={<ChatPage />} />
         </Route>

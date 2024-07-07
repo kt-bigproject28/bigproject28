@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { instance } from "../../apis/instance";
 
 const TopBars = styled.nav`
   display: flex;
@@ -39,26 +40,36 @@ const TopBarButton = styled.button`
   cursor: pointer;
 `;
 
-
 const TopBar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const accessToken = localStorage.getItem("accessToken");
-    console.log("access token: ", accessToken)
-    if (accessToken) {
-      setIsLoggedIn(true);
-    } else {
-      setIsLoggedIn(false);
-    }
+    const checkAuthStatus = async () => {
+      try {
+        const response = await instance.get("login/api/auth/check/");
+        if (response.data.is_authenticated) {
+          setIsLoggedIn(true);
+        } else {
+          setIsLoggedIn(false);
+        }
+      } catch (error) {
+        setIsLoggedIn(false);
+        console.error("Failed to check auth status:", error);
+      }
+    };
+
+    checkAuthStatus();
   }, []);
 
-  const handleLogout = () => {
-    localStorage.removeItem("accessToken");
-    localStorage.removeItem("refreshToken");
-    setIsLoggedIn(false);
-    navigate("/login");
+  const handleLogout = async () => {
+    try {
+      await instance.post("login/logout/");
+      setIsLoggedIn(false);
+      navigate("/login");
+    } catch (error) {
+      console.error("Failed to logout:", error);
+    }
   };
 
   return (

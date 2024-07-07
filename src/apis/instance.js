@@ -1,4 +1,3 @@
-// api 연결 기본 세팅
 import axios from "axios";
 
 export const instance = axios.create({

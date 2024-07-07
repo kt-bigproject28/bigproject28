@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   padding: 24px;
@@ -83,8 +85,8 @@ const RadioLabel = styled.label`
 const WritePostTemplate = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [image, setImage] = useState(null);
   const [postType, setPostType] = useState("buy");
+  const navigate = useNavigate();
 
   const handleTitleChange = (event) => {
     setTitle(event.target.value);
@@ -94,33 +96,22 @@ const WritePostTemplate = () => {
     setContent(event.target.value);
   };
 
-  const handleImageChange = (event) => {
-    setImage(event.target.files[0]);
-  };
-
   const handlePostTypeChange = (event) => {
     setPostType(event.target.value);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    const formData = new FormData();
-    formData.append("title", title);
-    formData.append("date", new Date().toISOString());
-    formData.append("content", content);
-    formData.append("image", image);
-    formData.append("postType", postType);
-
-    // 테스트로 콘솔에 출력합니다.
-    for (let [key, value] of formData.entries()) {
-      console.log(`${key}: ${value}`);
+    try {
+      const response = await axios.post("http://localhost:8000/community/post/create/", {
+        title,
+        content,
+        post_type: postType,
+      });
+      navigate(`/post/${response.data.id}`);
+    } catch (error) {
+      console.error("Failed to create post", error);
     }
-
-    // 작성 후 초기화
-    setTitle("");
-    setContent("");
-    setImage(null);
-    setPostType("buy");
   };
 
   return (
@@ -142,13 +133,6 @@ const WritePostTemplate = () => {
           value={content}
           onChange={handleContentChange}
           required
-        />
-        <Label htmlFor="image">사진 첨부</Label>
-        <Input
-          type="file"
-          id="image"
-          onChange={handleImageChange}
-          accept="image/*"
         />
         <RadioGroup>
           <RadioLabel>
