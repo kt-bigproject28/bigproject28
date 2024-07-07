@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import axios from "axios"; // axios 추가
+import axios from "axios";
 import { AiOutlineBell, AiOutlinePlus } from 'react-icons/ai'; 
 import { useNavigate } from 'react-router-dom';
+import Slider from '@mui/material/Slider';  // Slider 컴포넌트를 @mui/material에서 가져옴
 
-// 스타일 정의
 const PageContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -12,26 +12,31 @@ const PageContainer = styled.div`
   height: 100vh;
   width: 100vw;
   overflow: hidden;
-  background-color: #f0f0f0;
+  background-color: #fafafa;
   font-size: 1rem;
+  font-family: 'Roboto', sans-serif;
 `;
 
 const Header = styled.div`
   width: 100%;
   padding: 1rem;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  background-color: #fff;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: #a5d6a7; /* 더 연한 초록색 */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
 `;
 
 const Title = styled.h1`
   font-size: 1.5rem;
   margin: 0;
+  color: #fff; /* 제목 색상을 흰색으로 변경 */
 `;
 
 const IconContainer = styled.div`
+  position: absolute;
+  right: 1rem;
   display: flex;
   align-items: center;
 `;
@@ -48,58 +53,65 @@ const Content = styled.div`
   flex-direction: column;
   align-items: center;
   flex-grow: 1;
-  overflow: hidden;
+  overflow-y: auto;
 `;
 
 const CategoryButton = styled.button`
-  background-color: #a5d6a7;
+  background-color: #a5d6a7; /* 상단바와 동일한 배경색 */
   border: none;
-  border-radius: 20px;
-  padding: 0.5rem 1rem;
+  border-radius: 50px; /* 둥근 모서리 */
+  padding: 0.5rem 1rem; /* 여백 조정 */
   font-size: 1rem;
+  color: #fff;
   cursor: pointer;
   margin-bottom: 1rem;
+  width: auto; /* 너비 자동 조정 */
 `;
 
 const PlantGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-  gap: 0.5rem;
+  grid-template-columns: repeat(2, 1fr); /* 두 개의 열 */
+  gap: 1rem;
   width: 100%;
-  max-width: 600px;
+  padding: 0 1rem;
 `;
 
 const PlantButton = styled.button`
   background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 15px; /* 둥근 모서리 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 조정 */
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center; 
-  padding: 0.5rem;
+  justify-content: center;
+  padding: 1rem;
   border: none;
   cursor: pointer;
-  text-align: center; 
+  text-align: center;
+  transition: transform 0.2s;
+  &:hover {
+    transform: translateY(-5px);
+  }
 `;
 
 const PlantImage = styled.img`
-  width: 80px;
+  width: 80px; /* 이미지 크기 조정 */
   height: 80px;
   object-fit: cover;
-  border-radius: 10px;
-  margin-bottom: 0.5rem;
+  border-radius: 10px; /* 둥근 모서리 */
+  margin-bottom: 0.75rem; /* 여백 조정 */
 `;
 
 const PlusIcon = styled(AiOutlinePlus)`
-  font-size: 2rem;
+  font-size: 2.5rem; /* 아이콘 크기 조정 */
   color: #4CAF50;
   margin-bottom: 0.5rem;
 `;
 
 const PlantName = styled.h2`
-  font-size: 0.8rem;
+  font-size: 1rem; /* 폰트 크기 조정 */
   margin: 0.5rem 0;
+  color: #333;
 `;
 
 const PopupOverlay = styled.div`
@@ -118,10 +130,11 @@ const PopupOverlay = styled.div`
 const PopupContent = styled.div`
   background: #fff;
   padding: 2rem;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  width: 400px;
-  max-height: 80%;
+  border-radius: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 600px;
+  max-height: 90%;
   position: relative;
   z-index: 1001;
   display: flex;
@@ -147,6 +160,21 @@ const NavigateButton = styled.button`
   border-radius: 5px;
   cursor: pointer;
   margin-top: auto;
+  font-size: 1rem;
+  width: 100%;
+  max-width: 300px;
+  align-self: center;
+`;
+
+const SliderContainer = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+`;
+
+const SliderLabel = styled.div`
+  margin-right: 1rem;
+  font-size: 1rem;
 `;
 
 const CropsPage = () => {
@@ -167,7 +195,7 @@ const CropsPage = () => {
         <Title>작물 목록</Title>
         <IconContainer>
           <Icon>
-            <AiOutlineBell size={30} />
+            <AiOutlineBell size={30} color="#fff" />
           </Icon>
         </IconContainer>
       </Header>
@@ -219,6 +247,7 @@ const CropsPage = () => {
 
 const CropsPopup = ({ navigateToExpectedReturnPage }) => {
   const [area, setArea] = useState("");
+  const [areaRatio, setAreaRatio] = useState(0.5); // 슬라이더 상태 추가
   const [crops, setCrops] = useState([
     { name: "가을감자", region: "", hourlySales: "52,661원", salesPer3m: "7,765원" },
     { name: "가을무", region: "", hourlySales: "43,222원", salesPer3m: "7,759원" },
@@ -245,7 +274,7 @@ const CropsPopup = ({ navigateToExpectedReturnPage }) => {
   useEffect(() => {
     const fetchCrops = async () => {
       try {
-        const response = await axios.get("/api/crops"); // 실제 API 엔드포인트로 변경 필요
+        const response = await axios.get("/api/crops");
         setCrops(response.data);
       } catch (error) {
         console.error("Failed to fetch crops data:", error);
@@ -261,44 +290,62 @@ const CropsPopup = ({ navigateToExpectedReturnPage }) => {
 
   return (
     <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-      <div>
-        <h2>01 재배 면적을 설정해 주세요</h2>
+      <div style={{ marginBottom: '1.5rem' }}>
+        <h2 style={{ marginBottom: '0.5rem' }}>01 재배 면적을 설정해 주세요</h2>
         <input
           type="text"
           value={area}
           onChange={handleAreaChange}
           placeholder="면적을 입력해 주세요."
+          style={{ padding: '0.5rem', width: '100%', marginBottom: '0.5rem', borderRadius: '5px', border: '1px solid #ddd' }}
         />
-        <span> = m²</span>
+        <span>= m²</span>
       </div>
-      <div>
-        <h2>02 희망 재배 작물을 선택해 주세요</h2>
-        <input type="text" placeholder="원하는 작물명을 검색해 주세요." />
-        <button>검색</button>
-        <table>
+      <div style={{ marginBottom: '1.5rem' }}>
+        <h2 style={{ marginBottom: '0.5rem' }}>02 희망 재배 작물을 선택해 주세요</h2>
+        <div style={{ display: 'flex', marginBottom: '0.5rem' }}>
+          <input type="text" placeholder="원하는 작물명을 검색해 주세요." style={{ flex: 1, padding: '0.5rem', borderRadius: '5px', border: '1px solid #ddd' }} />
+          <button style={{ padding: '0.5rem 1rem', marginLeft: '0.5rem', borderRadius: '5px', border: '1px solid #ddd', background: '#4CAF50', color: '#fff' }}>검색</button>
+        </div>
+        <table style={{ width: '100%', borderCollapse: 'collapse' }}>
           <thead>
             <tr>
-              <th>선택</th>
-              <th>작물명</th>
-              <th>지역</th>
-              <th>시간당 매출</th>
-              <th>3.3㎡당 매출</th>
+              <th style={{ borderBottom: '2px solid #ddd', padding: '0.5rem' }}>선택</th>
+              <th style={{ borderBottom: '2px solid #ddd', padding: '0.5rem' }}>작물명</th>
+              <th style={{ borderBottom: '2px solid #ddd', padding: '0.5rem' }}>지역</th>
+              <th style={{ borderBottom: '2px solid #ddd', padding: '0.5rem' }}>시간당 매출</th>
+              <th style={{ borderBottom: '2px solid #ddd', padding: '0.5rem' }}>3.3㎡당 매출</th>
             </tr>
           </thead>
           <tbody>
             {crops.map((crop, index) => (
               <tr key={index}>
-                <td>
+                <td style={{ borderBottom: '1px solid #ddd', padding: '0.5rem', textAlign: 'center' }}>
                   <input type="checkbox" />
                 </td>
-                <td>{crop.name}</td>
-                <td>{crop.region}</td>
-                <td>{crop.hourlySales}</td>
-                <td>{crop.salesPer3m}</td>
+                <td style={{ borderBottom: '1px solid #ddd', padding: '0.5rem', textAlign: 'center' }}>{crop.name}</td>
+                <td style={{ borderBottom: '1px solid #ddd', padding: '0.5rem', textAlign: 'center' }}>{crop.region}</td>
+                <td style={{ borderBottom: '1px solid #ddd', padding: '0.5rem', textAlign: 'center' }}>{crop.hourlySales}</td>
+                <td style={{ borderBottom: '1px solid #ddd', padding: '0.5rem', textAlign: 'center' }}>{crop.salesPer3m}</td>
               </tr>
             ))}
           </tbody>
         </table>
+      </div>
+      <div style={{ marginBottom: '1.5rem' }}>
+        <h2 style={{ marginBottom: '0.5rem' }}>03 재배면적 비율을 설정해 주세요</h2>
+        <SliderContainer>
+          <SliderLabel>재배면적 비율</SliderLabel>
+          <Slider
+            value={areaRatio}
+            onChange={(e, newValue) => setAreaRatio(newValue)}
+            min={0}
+            max={1}
+            step={0.01}
+            style={{ width: '80%' }}
+          />
+          <div>{(areaRatio * 100).toFixed(0)}%</div>
+        </SliderContainer>
       </div>
       <NavigateButton onClick={navigateToExpectedReturnPage}>예상 수익 페이지로 이동</NavigateButton>
     </div>
