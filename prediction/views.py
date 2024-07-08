@@ -9,7 +9,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import ElasticNet
 
 # CSV 파일 경로
-CSV_FILE_PATH = 'prediction/all_crop_data.csv' #수익률 예측
+CSV_FILE_PATH = 'prediction/all_crop.csv' #수익률 예측
 CSV_FILE_PATH_1 = 'prediction/predict_code.csv' #품목 코드
 re = {'서울':['1101','108'], '부산':['2100','159'], '대구':['2200','143'], '광주':['2401','156'], '대전':['2501','133'],}
 
