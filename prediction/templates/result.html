@@ -17,6 +17,7 @@
                             <li>{{ key }}: {{ value|floatformat:0|intcomma }}</li>
                         {% endif %}
                     {% endfor %}
+                    <li>예측 시세 결과{{ result.price|floatformat:0|intcomma }}</li>
                 </ul>
             </li>
         {% endfor %}

@@ -9,14 +9,16 @@
     <form method="post" action="/prediction/">
         {% csrf_token %}
         <label for="land_area">토지면적(평) :</label>
-        <input type="text" id="land_area" name="land_area"><br><br>
+        <input type="text" id="land_area" name="land_area"><br>
+        <label for="region">예상 판매 지역 :</label>
+        <input type="text" id="region" name="region"><br><br>
         
         <div id="crop-inputs">
             <div class="crop-input">
                 <label for="crop_name">작물명 :</label>
                 <input type="text" name="crop_name"><br>
                 <label for="crop_ratio">작물비율 :</label>
-                <input type="text" name="crop_ratio"><br><br>
+                <input type="text" name="crop_ratio"><br>
                 <button type="button" onclick="removeCropInput(this)">작물 삭제하기</button><br><br>
             </div>
         </div>
