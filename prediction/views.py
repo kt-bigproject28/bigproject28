@@ -31,7 +31,7 @@ def predict_income(request):
         
         df['소득률 (%)'] = df['소득률 (%)'].astype(str)
         df['부가가치율 (%)'] = df['부가가치율 (%)'].astype(str)
-        df['주산물수량 (kg)'] = df['주산물수량 (kg)'].astype(str)
+        df['농가수취가격 (원/kg)'] = df['농가수취가격 (원/kg)'].astype(str)
 
         total_predicted_value = 0
         crop_results = []
