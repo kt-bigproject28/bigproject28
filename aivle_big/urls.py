@@ -25,6 +25,9 @@ def index(request):
 urlpatterns = [
     path('', index),
     path("admin/", admin.site.urls),
-    path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
+    path('login/', include('login.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
     path('prediction/', include('prediction.urls')),
+    
+    
 ]
