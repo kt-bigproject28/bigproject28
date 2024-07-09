@@ -31,7 +31,7 @@ def fetch_crop_data(crop_name, df, land_area, crop_ratio):
         adjusted_data = latest_crop_data.copy()
         for col in adjusted_data.index:
             if pd.api.types.is_numeric_dtype(adjusted_data[col]):
-                adjusted_data[col] = (adjusted_data[col] / 302.5) * land_area * crop_ratio
+                adjusted_data[col] = int((adjusted_data[col] / 302.5) * land_area * crop_ratio)
         return adjusted_income, adjusted_data, latest_year
     else:
         return None, None, None
