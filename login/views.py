@@ -19,12 +19,17 @@ from django.contrib.auth import logout
 
 logger = logging.getLogger(__name__)
 
+@csrf_exempt
 def signup(request):
     if request.method == 'GET':
         return render(request, 'signup.html')
-    if request.method == 'POST':
+    elif request.method == 'POST':
         try:
-            data = json.loads(request.body)
+            if request.content_type == 'application/json':
+                data = json.loads(request.body.decode('utf-8'))
+            else:
+                data = request.POST
+            
             form = UserRegistrationForm(data)
             if form.is_valid():
                 user = form.save()
@@ -34,8 +39,10 @@ def signup(request):
                 return JsonResponse({'status': 'error', 'errors': form.errors}, status=400)
         except json.JSONDecodeError:
             return JsonResponse({'status': 'error', 'message': 'Invalid JSON'}, status=400)
+        except Exception as e:
+            return JsonResponse({'status': 'error', 'message': f'An error occurred: {str(e)}'}, status=500)
     else:
-        return JsonResponse({'status': 'error', 'message': 'GET method not allowed'}, status=405)
+        return JsonResponse({'status': 'error', 'message': 'Method not allowed'}, status=405)
 
 
 @require_GET
