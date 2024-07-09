@@ -9,7 +9,8 @@
 </head>
 <body>
     <div class="container">
-        <a id="loginButton" class="login-button" href="{% url 'login' %}">Login</a>
+        <a id="loginButton" class="login-button" href="{% url 'login:login' %}">Login</a>
+        <a id="predictButton" class="predict-button" href="{% url 'prediction:predict_income' %}">Predict Income</a>
     </div>
 </body>
 </html>

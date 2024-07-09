@@ -47,7 +47,6 @@ def check_username(request):
     is_taken = User.objects.filter(username=username).exists()
     return JsonResponse({'is_taken': is_taken})
 
-
 @csrf_exempt  # Use this decorator if you're handling CSRF tokens manually
 def login(request):
     if request.method == 'GET':
@@ -65,11 +64,11 @@ def login(request):
             if not email or not password:
                 return JsonResponse({'status': 'error', 'message': 'Email and password are required.'}, status=400)
             
-            user = authenticate(request, email=email, password=password)
+            user = authenticate(request, username=email, password=password)
             
             if user is not None:
                 auth_login(request, user)
-                return JsonResponse({'status': 'success', 'message': 'User authenticated and logged in.'})
+                return redirect('index')  # Redirect to the index page on successful login
             else:
                 return JsonResponse({'status': 'error', 'message': 'Invalid email or password'}, status=401)
         except User.DoesNotExist:
@@ -81,6 +80,7 @@ def login(request):
     else:
         # If the method is neither GET nor POST
         return JsonResponse({'status': 'error', 'message': 'Method not allowed'}, status=405)
+
 
 
 

@@ -23,7 +23,7 @@ def index(request):
     return render(request,'index.html')
 
 urlpatterns = [
-    path('', index),
+    path('', index, name='index'),
     path("admin/", admin.site.urls),
     path('login/', include('login.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
