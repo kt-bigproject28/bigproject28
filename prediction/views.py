@@ -176,6 +176,11 @@ def predict_income(request):
         total_predicted_value = 0
         crop_results = []
 
+        # Fetch weather data once
+        df_2 = fetch_weather_data(region)
+        if df_2 is None:
+            return HttpResponse(f'{region}의 날씨 데이터를 찾을 수 없습니다.')
+
         for crop_name, crop_ratio in zip(crop_names, crop_ratios):
             adjusted_income, adjusted_data, latest_year = fetch_crop_data(crop_name, df, land_area, crop_ratio)
             if adjusted_income is None:
@@ -186,10 +191,6 @@ def predict_income(request):
             df_1 = fetch_market_prices(crop_name, region)
             if df_1 is None:
                 return HttpResponse(f'{crop_name}의 시세 데이터를 찾을 수 없습니다.')
-
-            df_2 = fetch_weather_data(region)
-            if df_2 is None:
-                return HttpResponse(f'{crop_name}의 날씨 데이터를 찾을 수 없습니다.')
 
             start = df_1['tm'].iloc[0].strftime('%Y%m%d')
             end = df_1['tm'].iloc[-1].strftime('%Y%m%d')
