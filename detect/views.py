@@ -5,10 +5,9 @@ from django.contrib.auth.decorators import login_required
 from .models import Pest, PestDetection
 from .utils import process_image
 
-@login_required  # Ensure only authenticated users can access this view
+@login_required
 def upload_image_for_detection(request):
     if request.method != 'POST' or not request.FILES.get('image'):
-        # If it's not a POST request or no image is uploaded, just render the upload form
         return render(request, 'upload.html')
 
     # Handle file upload
@@ -21,30 +20,33 @@ def upload_image_for_detection(request):
     pest_id, confidence = process_image(image_file)
 
     try:
-        # Retrieve the detected pest's information
+        # Retrieve the detected pest's information using the correct field
         pest_info = Pest.objects.get(id=pest_id)
     except Pest.DoesNotExist:
-        # If no pest is found with the ID returned by process_image, show an error
-        return render(request, 'result.html', {
-            'error': 'Pest not found. Please try another image.'
-        })
-
+        # return render(request, 'result.html', {
+        #     'error': 'Pest not found. Please try another image.'
+        # })
+            pest_info = Pest.objects.get(id=1)
+            confidence = 0.0
     # Save the detection information in the database
     detection = PestDetection(
         user=request.user,
         pest=pest_info,
         image=image_file,
-        detection_date=timezone.now()
+        detection_date=timezone.now(),
+        confidence=confidence
     )
     detection.save()
 
     # Prepare context data for the results page
     context = {
-        'pest_name': pest_info.name,
-        'threat_level': pest_info.threat_level,
+        'pest_name': pest_info.pest_name,
+        'occurrence_environment': pest_info.occurrence_environment,
+        'symptom_description': pest_info.symptom_description,
         'prevention_methods': pest_info.prevention_methods,
-        'confidence': confidence,
-        'image_url': image_url
+        'pesticide_name': pest_info.pesticide_name,
+        'image_url': pest_info.image_url,  # Use the pest's image_url field
+        'confidence': confidence
     }
 
     # Render the results page with the detection info

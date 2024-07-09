@@ -26,6 +26,7 @@ def index(request):
 urlpatterns = [
     path('', index),
     path("admin/", admin.site.urls),
-    path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
+    path('login/', include('login.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
     path('upload/', upload_image_for_detection, name='upload_image'),
 ]
