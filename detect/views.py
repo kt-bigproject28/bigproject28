@@ -55,6 +55,9 @@ from .utils import process_image
 
 # @login_required
 def upload_image_for_detection(request):
+    if request.method == 'GET':
+        return render(request, 'upload.html')
+    
     if request.method != 'POST':
         return JsonResponse({'error': 'Invalid request method. Only POST requests are allowed.'}, status=405)
     
@@ -69,25 +72,34 @@ def upload_image_for_detection(request):
         image_url = fs.url(filename)
 
         # Process the image to detect pests and get confidence level
-        pest_id, confidence = process_image(image_file)
+        try:
+            pest_id, confidence = process_image(image_file)
+        except Exception as e:
+            return JsonResponse({'error': 'Error processing image.', 'details': str(e)}, status=500)
 
         try:
             # Retrieve the detected pest's information using the correct field
             pest_info = Pest.objects.get(id=pest_id)
         except Pest.DoesNotExist:
             # Fallback to pest with id 1 if no pest is found
-            pest_info = Pest.objects.get(id=1)
-            confidence = 0.0
+            try:
+                pest_info = Pest.objects.get(id=1)
+                confidence = 0.0
+            except Pest.DoesNotExist:
+                return JsonResponse({'error': 'Fallback pest not found. Please ensure pest with id=1 exists.'}, status=500)
 
-        # Save the detection information in the database
-        detection = PestDetection(
-            user=request.user,
-            pest=pest_info,
-            image=image_file,
-            detection_date=timezone.now(),
-            confidence=confidence
-        )
-        detection.save()
+        try:
+            # Save the detection information in the database
+            detection = PestDetection(
+                user=request.user,
+                pest=pest_info,
+                image=image_file,
+                detection_date=timezone.now(),
+                confidence=confidence
+            )
+            detection.save()
+        except Exception as e:
+            return JsonResponse({'error': 'Error saving detection information.', 'details': str(e)}, status=500)
 
         # Prepare response data
         data = {
