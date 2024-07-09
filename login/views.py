@@ -19,6 +19,8 @@ from django.contrib.auth import logout
 
 logger = logging.getLogger(__name__)
 
+@csrf_exempt
+@require_http_methods(["GET", "POST"])
 def signup(request):
     if request.method == 'GET':
         return render(request, 'signup.html')

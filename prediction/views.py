@@ -8,6 +8,7 @@ from datetime import datetime, timedelta
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import ElasticNet
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
 
 # CSV 파일 경로
 CSV_FILE_PATH = 'prediction/all_crop_data.csv'  # 수익률 예측
@@ -152,10 +153,17 @@ def save_session_data(request, total_income, crop_results):
     request.session['prediction_history'].append(session_data)
     request.session.modified = True
 
+@csrf_exempt
 @login_required
 def predict_income(request):
     if request.method == 'POST':
-        land_area = float(request.POST.get('land_area'))
+        land_area_str = request.POST.get('land_area')
+        
+        try:
+            land_area = float(land_area_str)
+        except ValueError:
+            return HttpResponse('Invalid input for land area. Please enter a valid number.')
+        
         crop_names = request.POST.getlist('crop_name')
         crop_ratios = request.POST.getlist('crop_ratio')
         region = request.POST.get('region')
@@ -195,7 +203,7 @@ def predict_income(request):
                 'crop_name': crop_name,
                 'latest_year': latest_year,
                 'adjusted_data': adjusted_data.to_dict(),
-                'price': pred_value
+                'price': pred_value # 예측도매
             })
 
         save_session_data(request, total_predicted_value, crop_results)
@@ -208,6 +216,8 @@ def predict_income(request):
     else:
         return render(request, 'form.html')
 
+
+@csrf_exempt
 @login_required
 def session_history(request):
     prediction_history = request.session.get('prediction_history', [])
