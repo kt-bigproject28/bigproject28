@@ -120,17 +120,25 @@ from django.views.decorators.csrf import csrf_exempt
 def get_soil_fertilizer_info(request):
     if request.method == 'POST':
         url = 'http://apis.data.go.kr/1390802/SoilEnviron/FrtlzrUseExp/getSoilFrtlzrExprnInfo'
+        
+        def validate_and_convert(value, min_val, max_val):
+            try:
+                value = float(value)
+            except (ValueError, TypeError):
+                return str(min_val)
+            return str(max(min_val, min(value, max_val)))
+        
         params = {
             'serviceKey': '1/eYLkvnjZNKzzUpbpb+/VWWmZExnS0ave8VahtkI0X3CiletYaxBgBnlvunpx8tckfsXBogJJIQJayprpZbmA==',
-            'crop_Code': '07032',# csv에서 가져와서 적용필요!!!
-            'acid': request.POST.get('acid') if request.POST.get('acid') is not None else '0',
-            'om': request.POST.get('om') if request.POST.get('om') is not None else '0',
-            'vldpha': request.POST.get('vldpha') if request.POST.get('vldpha') is not None else '0',
-            'posifert_K': request.POST.get('posifert_k') if request.POST.get('posifert_k') is not None else '0',
-            'posifert_Ca': request.POST.get('posifert_ca') if request.POST.get('posifert_ca') is not None else '0',
-            'posifert_Mg': request.POST.get('posifert_mg') if request.POST.get('posifert_mg') is not None else '0',
-            'vldsia': request.POST.get('vldsia') if request.POST.get('vldsia') is not None else '0',
-            'selc': request.POST.get('selc') if request.POST.get('selc') is not None else '0',
+            'crop_Code': '07032',  # csv에서 가져와서 적용필요!!!
+            'acid': validate_and_convert(request.POST.get('acid'), 4, 9),
+            'om': validate_and_convert(request.POST.get('om'), 5, 300),
+            'vldpha': validate_and_convert(request.POST.get('vldpha'), 5, 1700),
+            'posifert_K': validate_and_convert(request.POST.get('posifert_k'), 0.01, 9),
+            'posifert_Ca': validate_and_convert(request.POST.get('posifert_ca'), 0.1, 30),
+            'posifert_Mg': validate_and_convert(request.POST.get('posifert_mg'), 0.1, 20),
+            'vldsia': validate_and_convert(request.POST.get('vldsia'), 5, 1500),
+            'selc': validate_and_convert(request.POST.get('selc'), 0, 10),
         }
         response = requests.get(url, params=params)
 
