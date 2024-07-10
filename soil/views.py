@@ -1,5 +1,3 @@
-# soil/views.py
-
 from django.shortcuts import render
 import requests
 import xml.etree.ElementTree as ET
@@ -7,41 +5,26 @@ import json
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse, HttpResponse
 import pandas as pd
-
-
+from django.contrib.auth.decorators import login_required
 
 def index(request):
     return render(request, 'soil.html')
 
-# 카카오맵 api
 def get_b_code(address):
-    # Kakao API URL 설정
     url = 'https://dapi.kakao.com/v2/local/search/address.json'
-
-    # 요청 파라미터 설정
     params = {
         'query': address
     }
-
-    # 요청 헤더 설정 (여기에 실제 REST API 키를 넣어야 합니다)
     headers = {
         'Authorization': 'KakaoAK c3899565939c467eee249e97805d28c1'
     }
-
-    # API 요청 보내기
     response = requests.get(url, headers=headers, params=params)
-
-    # 응답 확인
     if response.status_code == 200:
         data = response.json()
-
-        # 'b_code' 값 추출
         for document in data['documents']:
             address_info = document.get('address')
-
             if address_info:
                 return address_info.get('b_code')
-    
         print("유효한 주소 정보를 찾을 수 없습니다.")
         return None
     else:
@@ -49,7 +32,6 @@ def get_b_code(address):
         print(response.text)
         return None
     
-#법정동 코드 이용해서 화학성값 주소목록 불러오기   
 def get_soil_exam_data(b_code):
     url = 'http://apis.data.go.kr/1390802/SoilEnviron/SoilExam/getSoilExamList'
     params = {
@@ -58,14 +40,10 @@ def get_soil_exam_data(b_code):
         'Page_No': '1',
         'BJD_Code': b_code
     }
-
     response = requests.get(url, params=params)
     response_str = response.content
-
     root = ET.fromstring(response_str)
-
     data = []
-    # 데이터 추출
     items = root.find('body').find('items')
     if items is not None:
         for item in items.findall('item'):
@@ -88,10 +66,9 @@ def get_soil_exam_data(b_code):
             data.append(item_data)
     else:
         print("데이터가 없습니다.")
-
     return data
 
-
+@login_required
 @csrf_exempt
 def soil_exam_result(request):
     if request.method == 'POST':
@@ -110,11 +87,9 @@ def soil_exam_result(request):
             return HttpResponse('Address and crop name are required', status=400)
     return render(request, 'soil_exam_form.html')
 
+crop_code = pd.read_csv('soil/crop_code.csv')
 
-
-#csv파일 가져오기
-crop_code = pd.read_csv('soil\crop_code.csv')
-
+@login_required
 @csrf_exempt
 def get_soil_fertilizer_info(request):
     if request.method == 'POST':
@@ -126,9 +101,11 @@ def get_soil_fertilizer_info(request):
             except (ValueError, TypeError):
                 return str(min_val)
             return str(max(min_val, min(value, max_val)))
+        
         name = request.POST.get('crop_code')
         crop_code_value = crop_code.loc[crop_code['crop_name'] == name, 'crop_code'].values[0]
         crop_code_value = str(crop_code_value).zfill(5)
+        
         params = {
             'serviceKey': '1/eYLkvnjZNKzzUpbpb+/VWWmZExnS0ave8VahtkI0X3CiletYaxBgBnlvunpx8tckfsXBogJJIQJayprpZbmA==',
             'crop_Code': crop_code_value,
@@ -143,24 +120,14 @@ def get_soil_fertilizer_info(request):
         }
         
         response = requests.get(url, params=params)
-
-        # API 응답 디코딩
         response_content = response.content.decode('utf-8')
-
-        # XML 파싱
         root = ET.fromstring(response_content)
-
-        # body 요소가 존재하는지 확인
         body = root.find('body')
         if body is None:
             return render(request, 'error.html', {'message': 'No body element found in response.'})
-
-        # items 요소가 존재하는지 확인
         items = body.find('items')
         if items is None:
             return render(request, 'error.html', {'message': 'No items element found in response.'})
-
-        # 데이터 추출
         data = []
         for item in items.findall('item'):
             item_data = {
@@ -178,12 +145,5 @@ def get_soil_fertilizer_info(request):
                 'pre_Compost_Mix': item.find('pre_Compost_Mix').text if item.find('pre_Compost_Mix') is not None else None,
             }
             data.append(item_data)
-
         return render(request, 'fertilizer_info.html', {'data': data})
     return render(request, 'error.html', {'message': 'Invalid request method.'})
-
-
-
-
-
-

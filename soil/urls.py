@@ -3,6 +3,9 @@
 from django.urls import path
 from . import views
 
+
+app_name = 'soil'
+
 urlpatterns = [
     path('', views.index, name='index'),
     path('soil_exam/', views.soil_exam_result, name='soil_exam_result'),

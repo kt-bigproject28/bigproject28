@@ -1,0 +1,513 @@
+Watching for file changes with StatReloader
+E:\빅프로젝트_34조\be_soil\bigproject28-1\aivle_big\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Starting new HTTPS connection (1): dapi.kakao.com:443
+https://dapi.kakao.com:443 "GET /v2/local/search/address.json?query=%EA%B4%91%EC%A3%BC%EA%B4%91%EC%97%AD%EC%8B%9C+%EC%88%98%EC%99%84%EB%8F%99 HTTP/11" 200 None
+Starting new HTTP connection (1): apis.data.go.kr:80
+http://apis.data.go.kr:80 "GET /1390802/SoilEnviron/SoilExam/getSoilExamList?serviceKey=XMihbktoJgeXAASWbeYTDZaWDPRL08q%2Fi%2B1Sml2083f1m3gcyPJ2T1YwIrbry0Fe%2BHA1R4EU0S%2BzNL4LjuGBbQ%3D%3D&Page_Size=200&Page_No=1&BJD_Code=2920011400 HTTP/11" 200 571
+Not Found: /login/auth_check/
+Not Found: /login/auth_check/
+Not Found: /login/auth_check/
+Not Found: /login/auth_check/
+Not Found: /login/auth_check/
+Not Found: /login/auth_check/
+E:\빅프로젝트_34조\be_soil\bigproject28-1\soil\views.py changed, reloading.
+Watching for file changes with StatReloader
+Starting new HTTPS connection (1): dapi.kakao.com:443
+https://dapi.kakao.com:443 "GET /v2/local/search/address.json?query=%EA%B4%91%EC%A3%BC%EA%B4%91%EC%97%AD%EC%8B%9C+%EC%88%98%EC%99%84%EB%8F%99 HTTP/11" 200 None
+Starting new HTTP connection (1): apis.data.go.kr:80
+http://apis.data.go.kr:80 "GET /1390802/SoilEnviron/SoilExam/getSoilExamList?serviceKey=XMihbktoJgeXAASWbeYTDZaWDPRL08q%2Fi%2B1Sml2083f1m3gcyPJ2T1YwIrbry0Fe%2BHA1R4EU0S%2BzNL4LjuGBbQ%3D%3D&Page_Size=200&Page_No=1&BJD_Code=2920011400 HTTP/11" 200 571
+Internal Server Error: /login/
+Traceback (most recent call last):
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\urls\base.py", line 71, in reverse
+    extra, resolver = resolver.namespace_dict[ns]
+                      ~~~~~~~~~~~~~~~~~~~~~~~^^^^
+KeyError: 'login'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\base.py", line 171, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\defaulttags.py", line 479, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\urls\base.py", line 82, in reverse
+    raise NoReverseMatch("%s is not a registered namespace" % key)
+django.urls.exceptions.NoReverseMatch: 'login' is not a registered namespace
+E:\빅프로젝트_34조\be_soil\bigproject28-1\soil\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\urls\base.py", line 71, in reverse
+    extra, resolver = resolver.namespace_dict[ns]
+                      ~~~~~~~~~~~~~~~~~~~~~~~^^^^
+KeyError: 'login'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\빅프로젝트_34조\be_soil\bigproject28-1\aivle_big\urls.py", line 23, in index
+    return render(request,'index.html')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\base.py", line 171, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\defaulttags.py", line 479, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\urls\base.py", line 82, in reverse
+    raise NoReverseMatch("%s is not a registered namespace" % key)
+django.urls.exceptions.NoReverseMatch: 'login' is not a registered namespace
+E:\빅프로젝트_34조\be_soil\bigproject28-1\aivle_big\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\빅프로젝트_34조\be_soil\bigproject28-1\aivle_big\urls.py", line 23, in index
+    return render(request,'index.html')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\base.py", line 171, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\defaulttags.py", line 479, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\urls\base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\urls\resolvers.py", line 851, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'soil_exam' not found. 'soil_exam' is not a valid view function or pattern name.
+Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\빅프로젝트_34조\be_soil\bigproject28-1\aivle_big\urls.py", line 23, in index
+    return render(request,'index.html')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\base.py", line 171, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\defaulttags.py", line 479, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\urls\base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\urls\resolvers.py", line 851, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'soil_exam_form' not found. 'soil_exam_form' is not a valid view function or pattern name.
+Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\base.py", line 502, in parse
+    compile_func = self.tags[command]
+                   ~~~~~~~~~^^^^^^^^^
+KeyError: 'static'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\빅프로젝트_34조\be_soil\bigproject28-1\aivle_big\urls.py", line 23, in index
+    return render(request,'index.html')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\backends\django.py", line 33, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+           ^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\base.py", line 196, in compile_nodelist
+    return parser.parse()
+           ^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\base.py", line 504, in parse
+    self.invalid_block_tag(token, command, parse_until)
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\base.py", line 565, in invalid_block_tag
+    raise self.error(
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 7: 'static'. Did you forget to register or load this tag?
+Internal Server Error: /soil/soil_exam/
+Traceback (most recent call last):
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\빅프로젝트_34조\be_soil\bigproject28-1\soil\views.py", line 94, in soil_exam_result
+    return render(request, 'soil_exam_form.html')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\base.py", line 171, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\defaulttags.py", line 479, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\urls\base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\urls\resolvers.py", line 851, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'soil_exam_result' not found. 'soil_exam_result' is not a valid view function or pattern name.
+Starting new HTTPS connection (1): dapi.kakao.com:443
+https://dapi.kakao.com:443 "GET /v2/local/search/address.json?query=%EA%B4%91%EC%A3%BC%EA%B4%91%EC%97%AD%EC%8B%9C+%EC%88%98%EC%99%84%EB%8F%99 HTTP/11" 200 None
+Starting new HTTP connection (1): apis.data.go.kr:80
+http://apis.data.go.kr:80 "GET /1390802/SoilEnviron/SoilExam/getSoilExamList?serviceKey=XMihbktoJgeXAASWbeYTDZaWDPRL08q%2Fi%2B1Sml2083f1m3gcyPJ2T1YwIrbry0Fe%2BHA1R4EU0S%2BzNL4LjuGBbQ%3D%3D&Page_Size=200&Page_No=1&BJD_Code=2920011400 HTTP/11" 200 571
+Internal Server Error: /login/login/
+Traceback (most recent call last):
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\urls\base.py", line 71, in reverse
+    extra, resolver = resolver.namespace_dict[ns]
+                      ~~~~~~~~~~~~~~~~~~~~~~~^^^^
+KeyError: 'community'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\빅프로젝트_34조\be_soil\bigproject28-1\login\views.py", line 61, in login
+    return render(request, 'login.html')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\base.py", line 171, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\base.py", line 961, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\template\defaulttags.py", line 479, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\urls\base.py", line 82, in reverse
+    raise NoReverseMatch("%s is not a registered namespace" % key)
+django.urls.exceptions.NoReverseMatch: 'community' is not a registered namespace
+E:\빅프로젝트_34조\be_soil\bigproject28-1\soil\views.py changed, reloading.
+Watching for file changes with StatReloader
+Starting new HTTPS connection (1): dapi.kakao.com:443
+https://dapi.kakao.com:443 "GET /v2/local/search/address.json?query=%EA%B4%91%EC%A3%BC%EA%B4%91%EC%97%AD%EC%8B%9C+%EC%88%98%EC%99%84%EB%8F%99 HTTP/11" 200 None
+Starting new HTTP connection (1): apis.data.go.kr:80
+http://apis.data.go.kr:80 "GET /1390802/SoilEnviron/SoilExam/getSoilExamList?serviceKey=XMihbktoJgeXAASWbeYTDZaWDPRL08q%2Fi%2B1Sml2083f1m3gcyPJ2T1YwIrbry0Fe%2BHA1R4EU0S%2BzNL4LjuGBbQ%3D%3D&Page_Size=200&Page_No=1&BJD_Code=2920011400 HTTP/11" 200 571
+Starting new HTTPS connection (1): dapi.kakao.com:443
+https://dapi.kakao.com:443 "GET /v2/local/search/address.json?query=%EA%B4%91%EC%A3%BC%EA%B4%91%EC%97%AD%EC%8B%9C+%EC%88%98%EC%99%84%EB%8F%99 HTTP/11" 200 None
+Starting new HTTP connection (1): apis.data.go.kr:80
+http://apis.data.go.kr:80 "GET /1390802/SoilEnviron/SoilExam/getSoilExamList?serviceKey=XMihbktoJgeXAASWbeYTDZaWDPRL08q%2Fi%2B1Sml2083f1m3gcyPJ2T1YwIrbry0Fe%2BHA1R4EU0S%2BzNL4LjuGBbQ%3D%3D&Page_Size=200&Page_No=1&BJD_Code=2920011400 HTTP/11" 200 571
+Starting new HTTP connection (1): apis.data.go.kr:80
+http://apis.data.go.kr:80 "GET /1390802/SoilEnviron/FrtlzrUseExp/getSoilFrtlzrExprnInfo?serviceKey=1%2FeYLkvnjZNKzzUpbpb%2B%2FVWWmZExnS0ave8VahtkI0X3CiletYaxBgBnlvunpx8tckfsXBogJJIQJayprpZbmA%3D%3D&crop_Code=07032&acid=6.6&om=14.0&vldpha=404.0&posifert_K=1.207&posifert_Ca=5.35&posifert_Mg=2.93&vldsia=266.0&selc=0 HTTP/11" 200 283
+E:\빅프로젝트_34조\be_soil\bigproject28-1\soil\views.py changed, reloading.
+Watching for file changes with StatReloader
+Starting new HTTPS connection (1): dapi.kakao.com:443
+https://dapi.kakao.com:443 "GET /v2/local/search/address.json?query=%EA%B4%91%EC%A3%BC%EA%B4%91%EC%97%AD%EC%8B%9C+%EC%88%98%EC%99%84%EB%8F%99 HTTP/11" 401 None
+Starting new HTTP connection (1): apis.data.go.kr:80
+http://apis.data.go.kr:80 "GET /1390802/SoilEnviron/SoilExam/getSoilExamList?serviceKey=your_service_key_here&Page_Size=200&Page_No=1 HTTP/11" 200 229
+Internal Server Error: /soil/soil_exam/
+Traceback (most recent call last):
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\빅프로젝트_34조\be_soil\bigproject28-1\soil\views.py", line 76, in soil_exam_result
+    soil_data = get_soil_exam_data(b_code)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\빅프로젝트_34조\be_soil\bigproject28-1\soil\views.py", line 44, in get_soil_exam_data
+    items = root.find('body').find('items')
+            ^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'find'
+E:\빅프로젝트_34조\be_soil\bigproject28-1\soil\views.py changed, reloading.
+Watching for file changes with StatReloader
+Starting new HTTPS connection (1): dapi.kakao.com:443
+https://dapi.kakao.com:443 "GET /v2/local/search/address.json?query=%EA%B4%91%EC%A3%BC%EA%B4%91%EC%97%AD%EC%8B%9C+%EC%88%98%EC%99%84%EB%8F%99 HTTP/11" 200 None
+Starting new HTTP connection (1): apis.data.go.kr:80
+http://apis.data.go.kr:80 "GET /1390802/SoilEnviron/SoilExam/getSoilExamList?serviceKey=XMihbktoJgeXAASWbeYTDZaWDPRL08q%2Fi%2B1Sml2083f1m3gcyPJ2T1YwIrbry0Fe%2BHA1R4EU0S%2BzNL4LjuGBbQ%3D%3D&Page_Size=200&Page_No=1&BJD_Code=2920011400 HTTP/11" 200 571
+E:\빅프로젝트_34조\be_soil\bigproject28-1\soil\views.py changed, reloading.
+Watching for file changes with StatReloader
+Starting new HTTPS connection (1): dapi.kakao.com:443
+https://dapi.kakao.com:443 "GET /v2/local/search/address.json?query=%EA%B4%91%EC%A3%BC%EA%B4%91%EC%97%AD%EC%8B%9C+%EC%88%98%EC%99%84%EB%8F%99 HTTP/11" 401 None
+Starting new HTTP connection (1): apis.data.go.kr:80
+http://apis.data.go.kr:80 "GET /1390802/SoilEnviron/SoilExam/getSoilExamList?serviceKey=your_service_key_here&Page_Size=200&Page_No=1 HTTP/11" 200 229
+Internal Server Error: /soil/soil_exam/
+Traceback (most recent call last):
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\빅프로젝트_34조\be_soil\bigproject28-1\soil\views.py", line 73, in wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\빅프로젝트_34조\be_soil\bigproject28-1\soil\views.py", line 84, in soil_exam_result
+    soil_data = get_soil_exam_data(b_code)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\빅프로젝트_34조\be_soil\bigproject28-1\soil\views.py", line 44, in get_soil_exam_data
+    items = root.find('body').find('items')
+            ^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'find'
+Starting new HTTPS connection (1): dapi.kakao.com:443
+https://dapi.kakao.com:443 "GET /v2/local/search/address.json?query=%EA%B4%91%EC%A3%BC%EA%B4%91%EC%97%AD%EC%8B%9C+%EC%88%98%EC%99%84%EB%8F%99 HTTP/11" 401 None
+Starting new HTTP connection (1): apis.data.go.kr:80
+http://apis.data.go.kr:80 "GET /1390802/SoilEnviron/SoilExam/getSoilExamList?serviceKey=your_service_key_here&Page_Size=200&Page_No=1 HTTP/11" 200 229
+Internal Server Error: /soil/soil_exam/
+Traceback (most recent call last):
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\빅프로젝트_34조\be_soil\bigproject28-1\soil\views.py", line 73, in wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\빅프로젝트_34조\be_soil\bigproject28-1\soil\views.py", line 84, in soil_exam_result
+    soil_data = get_soil_exam_data(b_code)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\빅프로젝트_34조\be_soil\bigproject28-1\soil\views.py", line 44, in get_soil_exam_data
+    items = root.find('body').find('items')
+            ^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'find'
+Unauthorized: /login/login/
+E:\빅프로젝트_34조\be_soil\bigproject28-1\soil\views.py changed, reloading.
+Watching for file changes with StatReloader
+Starting new HTTPS connection (1): dapi.kakao.com:443
+https://dapi.kakao.com:443 "GET /v2/local/search/address.json?query=%EA%B4%91%EC%A3%BC%EA%B4%91%EC%97%AD%EC%8B%9C+%EC%88%98%EC%99%84%EB%8F%99 HTTP/11" 401 None
+Starting new HTTP connection (1): apis.data.go.kr:80
+http://apis.data.go.kr:80 "GET /1390802/SoilEnviron/SoilExam/getSoilExamList?serviceKey=your_service_key_here&Page_Size=200&Page_No=1 HTTP/11" 200 229
+Internal Server Error: /soil/soil_exam/
+Traceback (most recent call last):
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lhu07\anaconda3\envs\big_project\Lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\빅프로젝트_34조\be_soil\bigproject28-1\soil\views.py", line 77, in soil_exam_result
+    soil_data = get_soil_exam_data(b_code)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\빅프로젝트_34조\be_soil\bigproject28-1\soil\views.py", line 44, in get_soil_exam_data
+    items = root.find('body').find('items')
+            ^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'find'
+E:\빅프로젝트_34조\be_soil\bigproject28-1\soil\views.py changed, reloading.
+Watching for file changes with StatReloader
+Starting new HTTPS connection (1): dapi.kakao.com:443
+https://dapi.kakao.com:443 "GET /v2/local/search/address.json?query=%EA%B4%91%EC%A3%BC%EA%B4%91%EC%97%AD%EC%8B%9C+%EC%88%98%EC%99%84%EB%8F%99 HTTP/11" 200 None
+Starting new HTTP connection (1): apis.data.go.kr:80
+http://apis.data.go.kr:80 "GET /1390802/SoilEnviron/SoilExam/getSoilExamList?serviceKey=XMihbktoJgeXAASWbeYTDZaWDPRL08q%2Fi%2B1Sml2083f1m3gcyPJ2T1YwIrbry0Fe%2BHA1R4EU0S%2BzNL4LjuGBbQ%3D%3D&Page_Size=200&Page_No=1&BJD_Code=2920011400 HTTP/11" 200 571
+E:\빅프로젝트_34조\be_soil\bigproject28-1\soil\views.py changed, reloading.
+Watching for file changes with StatReloader
+E:\빅프로젝트_34조\be_soil\bigproject28-1\soil\views.py changed, reloading.
+Watching for file changes with StatReloader
+Not Found: /selfchatbot/chat_sessions/
+Not Found: /selfchatbot/chat_sessions/
+Not Found: /selfchatbot/chat_sessions/
+Not Found: /selfchatbot/chat_history/0aa22254-1134-4502-80f1-504291934b6b/
+Not Found: /selfchatbot/chat_history/0aa22254-1134-4502-80f1-504291934b6b/
+Not Found: /selfchatbot/chat_history/0aa22254-1134-4502-80f1-504291934b6b/

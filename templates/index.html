@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang="en">
+    
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +10,8 @@
 </head>
 <body>
     <div class="container">
-        <a id="loginButton" class="login-button" href="{% url 'login' %}">Login</a>
+        <a id="loginButton" class="login-button" href="{% url 'login:login' %}">Login</a>
+        <a id="soil" class="soil-button" href="{% url 'soil:soil_exam_result' %}">Soil Examination</a>
     </div>
 </body>
 </html>
