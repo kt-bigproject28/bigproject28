@@ -6,6 +6,9 @@ import xml.etree.ElementTree as ET
 import json
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse, HttpResponse
+import pandas as pd
+
+
 
 def index(request):
     return render(request, 'soil.html')
@@ -109,12 +112,8 @@ def soil_exam_result(request):
 
 
 
-
-
-import requests
-import xml.etree.ElementTree as ET
-from django.shortcuts import render
-from django.views.decorators.csrf import csrf_exempt
+#csv파일 가져오기
+crop_code = pd.read_csv('soil\crop_code.csv')
 
 @csrf_exempt
 def get_soil_fertilizer_info(request):
@@ -127,10 +126,12 @@ def get_soil_fertilizer_info(request):
             except (ValueError, TypeError):
                 return str(min_val)
             return str(max(min_val, min(value, max_val)))
-        
+        name = request.POST.get('crop_code')
+        crop_code_value = crop_code.loc[crop_code['crop_name'] == name, 'crop_code'].values[0]
+        crop_code_value = str(crop_code_value).zfill(5)
         params = {
             'serviceKey': '1/eYLkvnjZNKzzUpbpb+/VWWmZExnS0ave8VahtkI0X3CiletYaxBgBnlvunpx8tckfsXBogJJIQJayprpZbmA==',
-            'crop_Code': '07032',  # csv에서 가져와서 적용필요!!!
+            'crop_Code': crop_code_value,
             'acid': validate_and_convert(request.POST.get('acid'), 4, 9),
             'om': validate_and_convert(request.POST.get('om'), 5, 300),
             'vldpha': validate_and_convert(request.POST.get('vldpha'), 5, 1700),
@@ -140,6 +141,7 @@ def get_soil_fertilizer_info(request):
             'vldsia': validate_and_convert(request.POST.get('vldsia'), 5, 1500),
             'selc': validate_and_convert(request.POST.get('selc'), 0, 10),
         }
+        print(params)
         response = requests.get(url, params=params)
 
         # API 응답 디코딩
