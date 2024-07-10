@@ -141,7 +141,7 @@ def get_soil_fertilizer_info(request):
             'vldsia': validate_and_convert(request.POST.get('vldsia'), 5, 1500),
             'selc': validate_and_convert(request.POST.get('selc'), 0, 10),
         }
-        print(params)
+        
         response = requests.get(url, params=params)
 
         # API 응답 디코딩
